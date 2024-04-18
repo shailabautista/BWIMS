@@ -6,10 +6,9 @@ const News = ({ news }) => {
   const truncate = (str, maxLength) => {
     return str.length > maxLength ? str.slice(0, maxLength - 1) + "..." : str;
   };
-
   const scrollContainerStyle = {
     overflow: "auto",
-    scrollbarWidth: "none",
+    overflowY: "hidden",
     msOverflowStyle: "none",
     "&::-webkit-scrollbar": {
       width: 0,
