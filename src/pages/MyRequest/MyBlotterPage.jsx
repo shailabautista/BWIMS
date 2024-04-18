@@ -54,42 +54,44 @@ const MyBlotterPage = () => {
             <div className="text-center">No data available.</div>
           ) : (
             <>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Last Name</th>
-                    <th>First Name</th>
-                    <th>Middle Name</th>
-                    <th>Contact No</th>
-                    <th>Age</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentItems.map((entry, index) => (
-                    <tr key={index}>
-                      <td>{entry.lastName}</td>
-                      <td>{entry.firstName}</td>
-                      <td>{entry.middleName}</td>
-                      <td>{entry.contactNo}</td>
-                      <td>{entry.age}</td>
-                      <td>{formatDate(entry.date)}</td>
-                      <td>{entry.status}</td>
-                      <td className="d-flex gap-2">
-                        <Link
-                          className="btn btn-primary"
-                          to={`/e-services/blotter/${entry._id}`}
-                        >
-                          View
-                        </Link>
-                      </td>
+              <div className="overflow-auto">
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Middle Name</th>
+                      <th>Contact No</th>
+                      <th>Age</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
                     </tr>
-                  ))}
-                </tbody>
-              </Table>
-              
+                  </thead>
+                  <tbody>
+                    {currentItems.map((entry, index) => (
+                      <tr key={index}>
+                        <td>{entry.lastName}</td>
+                        <td>{entry.firstName}</td>
+                        <td>{entry.middleName}</td>
+                        <td>{entry.contactNo}</td>
+                        <td>{entry.age}</td>
+                        <td>{formatDate(entry.date)}</td>
+                        <td>{entry.status}</td>
+                        <td className="d-flex gap-2">
+                          <Link
+                            className="btn btn-primary"
+                            to={`/e-services/blotter/${entry._id}`}
+                          >
+                            View
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              </div>
+
               <div className="d-flex justify-content-between">
                 <ItemsPerPage
                   itemsPerPage={itemsPerPage}

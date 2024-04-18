@@ -18,12 +18,11 @@ const MyCertificateOfIndigencyPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredData = indigency
-    .filter((entry) =>
-      Object.values(entry).some((value) =>
-        value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
+  const filteredData = indigency.filter((entry) =>
+    Object.values(entry).some((value) =>
+      value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -52,7 +51,10 @@ const MyCertificateOfIndigencyPage = () => {
             <div className="text-center">No data available.</div>
           ) : (
             <>
-              <FormDataTable data={currentItems} category="certificate-of-indigency"/>
+              <FormDataTable
+                data={currentItems}
+                category="certificate-of-indigency"
+              />
 
               <div className="d-flex justify-content-between">
                 <ItemsPerPage
