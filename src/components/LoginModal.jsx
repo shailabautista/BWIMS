@@ -79,7 +79,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
       await sendEmail({
         to_email: formData.email,
         subject: "Forgot Password",
-        message: `Click this link to reset your password http://localhost:5173/reset/${response.data.userId}`,
+        message: `Click this link to reset your password https://bwims.vercel.app//reset/${response.data.userId}`,
       });
       
       toast.success("Check your email for reset password link!");
