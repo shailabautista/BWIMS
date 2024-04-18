@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Table,
-  Container,
-  Button,
-  Spinner,
-} from "react-bootstrap";
+import { Table, Container, Button, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -93,7 +88,7 @@ const RegisteredAccountsPage = () => {
   };
 
   return (
-    <Container className="mt-4 overflow-auto">
+    <Container className="mt-4">
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
       {loading ? (
@@ -103,41 +98,43 @@ const RegisteredAccountsPage = () => {
           </Spinner>
         </Container>
       ) : (
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Access</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((user) => (
-              <tr key={user._id}>
-                <td>{`${user.lName}, ${user.fName} ${user.mName}`}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
-                <td>{user.accountStatus}</td>
-                <td className="d-flex gap-1">
-                  <Link
-                    to={`/e-services/user-details/${user._id}`}
-                    className="btn btn-primary text-decoration-none"
-                  >
-                    Details
-                  </Link>
-                  <Button
-                    variant="danger"
-                    onClick={() => handleDelete(user._id)}
-                  >
-                    Delete
-                  </Button>
-                </td>
+        <div className="overflow-auto">
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Access</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {currentItems.map((user) => (
+                <tr key={user._id}>
+                  <td>{`${user.lName}, ${user.fName} ${user.mName}`}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                  <td>{user.accountStatus}</td>
+                  <td className="d-flex gap-1">
+                    <Link
+                      to={`/e-services/user-details/${user._id}`}
+                      className="btn btn-primary text-decoration-none"
+                    >
+                      Details
+                    </Link>
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDelete(user._id)}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       )}
 
       <ItemsPerPage

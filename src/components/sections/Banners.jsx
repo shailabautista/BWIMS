@@ -33,9 +33,7 @@ const Banners = ({ title, subtitle, imgUrl }) => {
               fontSize: `clamp(2rem, -1.3125rem + 10vw, 5rem)`,
               fontWeight: "bold",
               opacity: animationIndex === 0 ? 1 : 0,
-              transition: `opacity 2s ease-in-out ${
-                animationIndex === 1 ? "0.5s" : "0s"
-              }`,
+              transition: `opacity 2s ease-in-out`,
             }}
           >
             {sequences[animationIndex]}

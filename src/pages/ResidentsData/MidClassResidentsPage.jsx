@@ -116,6 +116,8 @@ const MidClassResidentsPage = () => {
           {filteredData.length === 0 ? (
             <div className="text-center">No data available.</div>
           ) : (
+            <div className=" overflow-auto">
+
             <Table striped bordered hover>
               <thead>
                 <tr>
@@ -155,6 +157,7 @@ const MidClassResidentsPage = () => {
                 ))}
               </tbody>
             </Table>
+            </div>
           )}
 
           <div className="d-flex justify-content-between">

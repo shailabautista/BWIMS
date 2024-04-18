@@ -114,45 +114,47 @@ const UpperClassResidentsPage = () => {
           {filteredData.length === 0 ? (
             <div className="text-center">No data available.</div>
           ) : (
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Last Name</th>
-                  <th>First Name</th>
-                  <th>Upperdle Name</th>
-                  <th>Contact No</th>
-                  <th>Email</th>
-                  <th>Sex</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {currentItems.map((entry, index) => (
-                  <tr key={index}>
-                    <td>{entry.lName}</td>
-                    <td>{entry.fName}</td>
-                    <td>{entry.mName}</td>
-                    <td>{entry.contactNo}</td>
-                    <td>{entry.email}</td>
-                    <td>{entry.sex}</td>
-                    <td className="d-flex gap-2">
-                      <Link
-                        className="btn btn-primary"
-                        to={`/e-services/user/${entry._id}`}
-                      >
-                        View
-                      </Link>
-                      <Button
-                        variant="danger"
-                        onClick={() => handleDelete(entry._id)}
-                      >
-                        Delete
-                      </Button>
-                    </td>
+            <div className=" overflow-auto">
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Upperdle Name</th>
+                    <th>Contact No</th>
+                    <th>Email</th>
+                    <th>Sex</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {currentItems.map((entry, index) => (
+                    <tr key={index}>
+                      <td>{entry.lName}</td>
+                      <td>{entry.fName}</td>
+                      <td>{entry.mName}</td>
+                      <td>{entry.contactNo}</td>
+                      <td>{entry.email}</td>
+                      <td>{entry.sex}</td>
+                      <td className="d-flex gap-2">
+                        <Link
+                          className="btn btn-primary"
+                          to={`/e-services/user/${entry._id}`}
+                        >
+                          View
+                        </Link>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleDelete(entry._id)}
+                        >
+                          Delete
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </div>
           )}
 
           <div className="d-flex justify-content-between">

@@ -116,63 +116,67 @@ const BlotterPage = () => {
   return (
     <Container>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Last Name</th>
-            <th>First Name</th>
-            <th>Middle Name</th>
-            <th>Contact No</th>
-            <th>Age</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems.map((entry, index) => (
-            <tr key={index}>
-              <td>{entry.lastName}</td>
-              <td>{entry.firstName}</td>
-              <td>{entry.middleName}</td>
-              <td>{entry.contactNo}</td>
-              <td>{entry.age}</td>
-              <td>{formatDate(entry.date)}</td>
-              <td>{entry.status}</td>
-              <td className="d-flex gap-2">
-                <Link
-                  className="btn btn-primary"
-                  to={`/e-services/blotter/${entry._id}`}
-                >
-                  View
-                </Link>
-                <>
-                  <Button
-                    variant="success"
-                    onClick={() => handleApprove(entry._id, entry.userId.email)}
+      <div className=" overflow-auto">
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Last Name</th>
+              <th>First Name</th>
+              <th>Middle Name</th>
+              <th>Contact No</th>
+              <th>Age</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {currentItems.map((entry, index) => (
+              <tr key={index}>
+                <td>{entry.lastName}</td>
+                <td>{entry.firstName}</td>
+                <td>{entry.middleName}</td>
+                <td>{entry.contactNo}</td>
+                <td>{entry.age}</td>
+                <td>{formatDate(entry.date)}</td>
+                <td>{entry.status}</td>
+                <td className="d-flex gap-2">
+                  <Link
+                    className="btn btn-primary"
+                    to={`/e-services/blotter/${entry._id}`}
                   >
-                    Approve
-                  </Button>
+                    View
+                  </Link>
+                  <>
+                    <Button
+                      variant="success"
+                      onClick={() =>
+                        handleApprove(entry._id, entry.userId.email)
+                      }
+                    >
+                      Approve
+                    </Button>
+                    <Button
+                      variant="danger"
+                      onClick={() =>
+                        handleReject(entry._id, entry.userId.email)
+                      }
+                    >
+                      Reject
+                    </Button>
+                  </>
                   <Button
                     variant="danger"
-                    onClick={() => handleReject(entry._id, entry.userId.email)}
+                    onClick={() => handleDelete(entry._id)}
                   >
-                    Reject
+                    Delete
                   </Button>
-                </>
-                <Button
-                  variant="danger"
-                  onClick={() => handleDelete(entry._id)}
-                >
-                  Delete
-                </Button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
       <div className="d-flex justify-content-between">
         <ItemsPerPage
           itemsPerPage={itemsPerPage}
