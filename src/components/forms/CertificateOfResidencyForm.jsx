@@ -61,7 +61,7 @@ const CertificateOfResidencyForm = () => {
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
-        fee: 100 
+        fee: 70
       }));
     } else {
       setFormData((prevData) => ({
@@ -238,7 +238,7 @@ const CertificateOfResidencyForm = () => {
               </Row>
             </Form.Group>
             <p className="fw-bold">
-              If you choose delivery, please prepare your payment for only 20
+              If you choose delivery, please prepare your payment for only 70
               pesos
             </p>
         
@@ -256,11 +256,6 @@ const CertificateOfResidencyForm = () => {
               />
             </Form.Group>
 
-            {formData.pickUp === "delivery" && (
-              <div className="mb-2">
-                <h5>Delivery Fee: ₱100</h5>
-              </div>
-            )}
             <Button variant="success" size="lg" className="fw-bold" onClick={handleSubmit}>
               {
                 loading ? (

@@ -16,7 +16,7 @@ const UserDetailsPage = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/users/${id}`, {
+      const response = await axios.get(`${import.meta.env.VITE_BWIMS_API_KEY}/api/users/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
