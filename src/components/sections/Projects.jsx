@@ -1,7 +1,8 @@
 import { Col, Card, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Projects = ({ projects }) => {
+  const location = useLocation();
   const truncate = (str, maxLength) => {
     return str.length > maxLength ? str.slice(0, maxLength - 1) + "..." : str;
   };
@@ -18,7 +19,7 @@ const Projects = ({ projects }) => {
   return (
     <section className="mt-2 bg-white p-5">
       <h2 className="text-success fw-bold text-center">
-        BARANGAY FEATURED PROJECTS
+        {location.pathname === "/" ? "OUR" : "BARANGAY"} FEATURED PROJECTS
       </h2>
       <Container>
         <p className="text-center fs-5">

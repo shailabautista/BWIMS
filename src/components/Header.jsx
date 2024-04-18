@@ -22,16 +22,15 @@ const Header = () => {
 
   const handleBarangay = (e) => {
     const selectedBarangay = e.target.value;
-    setBarangay(selectedBarangay);
-    if (location.pathname === "/" || location.pathname === "about") {
+    if (location.pathname === "/" || location.pathname === "/about") {
       if (selectedBarangay === "default") {
         navigate("/");
       } else {
         navigate("/about");
-        fetchData();
-
       }
     }
+    setBarangay(selectedBarangay);
+
     Cookies.set("barangay", selectedBarangay);
   };
 

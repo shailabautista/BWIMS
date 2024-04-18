@@ -1,7 +1,8 @@
 import { Col, Card, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const News = ({ news }) => {
+  const location = useLocation();
   const truncate = (str, maxLength) => {
     return str.length > maxLength ? str.slice(0, maxLength - 1) + "..." : str;
   };
@@ -17,7 +18,7 @@ const News = ({ news }) => {
 
   return (
     <section className="mt-2 p-5">
-      <h2 className="text-success fw-bold text-center">BARANGAY NEWS AND EVENTS</h2>
+      <h2 className="text-success fw-bold text-center">{location.pathname === "/" ? "OUR" : "BARANGAY"} NEWS AND EVENTS</h2>
       <Container>
         <p className="text-center fs-5">
           Get our latest, news and announcement! #DAGUPAN
