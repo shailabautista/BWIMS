@@ -6,8 +6,8 @@ const userNavigationRoutes = [
   { name: 'Home', path: barangay != "defaiult" ? '/about' : "/", icon: FaHome },
   { name: 'Announcements', path: '/e-services/announcements', icon: FaBell },
   { name: 'My Profile', path: '/e-services/profile', icon: FaUser },
-  { name: 'Edit Password', path: '/e-services/edit-password', icon: FaKey },
   { name: 'My Requests', path: '/e-services/my-requests', icon: FaEnvelopeOpenText },
+  { name: 'E-Services', path: '/e-services/services', icon: FaFileUpload },
 ];
 
 export default userNavigationRoutes
