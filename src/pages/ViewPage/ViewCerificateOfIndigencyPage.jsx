@@ -95,7 +95,7 @@ const PDFDocument = ({ formData, barangay }) => (
 const ViewCertificateOfIndigencyPage = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [clearanceData, setClearanceData] = useState(null);
+  const [formData, setFormData] = useState(null);
   const token = Cookies.get("token");
   const barangay = Cookies.get("barangay");
   const role = Cookies.get("role");
@@ -111,7 +111,7 @@ const ViewCertificateOfIndigencyPage = () => {
             },
           }
         );
-        setClearanceData(response.data);
+        setFormData(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -134,7 +134,7 @@ const ViewCertificateOfIndigencyPage = () => {
         </div>
       ) : (
         <Container className="w-75">
-          {clearanceData && (
+          {formData && (
             <Card>
               <Card.Header>Certificate of Indigency Details</Card.Header>
               <Card.Body>
