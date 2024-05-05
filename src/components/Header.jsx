@@ -79,7 +79,7 @@ const Header = () => {
       <Row className="d-flex justify-content-between align-items-center gap-2">
         <Col className="d-flex align-items-center">
           <img src={Logo} alt="logo" width={100} />
-          {filteredBarangayData && filteredBarangayData[0].logo && (
+          {filteredBarangayData && filteredBarangayData[0].logo && barangay &&(
             <img
               src={
                 filteredBarangayData[0].logo ||
