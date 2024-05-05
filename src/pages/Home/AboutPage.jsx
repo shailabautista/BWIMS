@@ -11,7 +11,7 @@ const AboutPage = () => {
   if (loading) return <Loading />;
 
   if (!filteredBarangayData || filteredBarangayData.length === 0) {
-    return null; 
+    return null;
   }
 
   return (

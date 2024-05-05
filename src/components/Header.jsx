@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import useCurrentUserData from "../hooks/useCurrentUserData";
 import Loading from "./Loading";
 import axios from "axios";
+import useBarangayData from "../hooks/useBarangayData";
 
 const Header = () => {
   const location = useLocation();
@@ -18,8 +19,10 @@ const Header = () => {
 
   const [barangay, setBarangay] = useState(myBarangay || "default");
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const { userData, loading } = useCurrentUserData();
+  const { userData, loading: userLoading } = useCurrentUserData();
+  const {filteredBarangayData, loading: barangayLoading } = useBarangayData();
 
+  
   const handleBarangay = (e) => {
     const selectedBarangay = e.target.value;
     if (location.pathname === "/" || location.pathname === "/about") {
@@ -27,6 +30,7 @@ const Header = () => {
         navigate("/");
       } else {
         navigate("/about");
+        
       }
     }
     setBarangay(selectedBarangay);
@@ -70,13 +74,16 @@ const Header = () => {
     }
   };
 
-  if (loading) return <Loading />;
+  if (userLoading && barangayLoading) return <Loading />;
 
   return (
     <div className="container p-4">
       <Row className="d-flex justify-content-between align-items-center gap-2">
         <Col className="d-flex align-items-center">
           <img src={Logo} alt="logo" width={100} />
+          {filteredBarangayData && filteredBarangayData[0].logo && (
+            <img src={filteredBarangayData[0].logo} alt="logo" width={60} className="m-2" />
+          )}
           <div className="ms-3">
             <h5 className="fw-normal text-secondary fs-3">
               Republic of the Philippines

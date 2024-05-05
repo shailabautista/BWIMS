@@ -73,6 +73,15 @@ const BusinessPermitPage = () => {
           },
         }
       );
+      await axios.delete(
+        `${import.meta.env.VITE_BWIMS_API_KEY}/api/forms/businessPermit/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       await sendEmail({
         to_email: email,
         subject: "Business Permit Form",

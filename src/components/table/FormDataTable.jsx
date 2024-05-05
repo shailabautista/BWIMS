@@ -26,7 +26,7 @@ const FormDataTable = ({ data, category, handleApprove, handleReject }) => {
             <th>Contact No</th>
             <th>Date</th>
             <th>Status</th>
-            <th>Pick Up</th>
+            <th>Fee</th>
             <th>Color</th>
             <th>Action</th>
           </tr>
@@ -40,7 +40,7 @@ const FormDataTable = ({ data, category, handleApprove, handleReject }) => {
               <td>{entry.contactNo}</td>
               <td>{formatDate(entry.date)}</td>
               <td>{entry.status}</td>
-              <td>{entry.pickUp}</td>
+              <td>{entry.fee === 0 ? "free" : `₱${entry.fee}`}</td>
               <td>{entry.color}</td>
               <td className="d-flex gap-2">
                 <Link
@@ -55,22 +55,27 @@ const FormDataTable = ({ data, category, handleApprove, handleReject }) => {
                 </Link>
                 {allowedPaths.includes(location.pathname) && (
                   <>
-                    <Button
-                      variant="success"
-                      onClick={() =>
-                        handleApprove(entry._id, entry.userId.email)
-                      }
-                    >
-                      Approve
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() =>
-                        handleReject(entry._id, entry.userId.email)
-                      }
-                    >
-                      Reject
-                    </Button>
+                    {entry.status !== "approve" && (
+                      <>
+                        <Button
+                          variant="success"
+                          onClick={() =>
+                            handleApprove(entry._id, entry.userId.email)
+                          }
+                        >
+                          Approve
+                        </Button>
+                        
+                        <Button
+                          variant="danger"
+                          onClick={() =>
+                            handleReject(entry._id, entry.userId.email)
+                          }
+                        >
+                          Reject
+                        </Button>
+                      </>
+                    )}
                   </>
                 )}
               </td>

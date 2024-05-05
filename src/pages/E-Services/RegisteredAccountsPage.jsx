@@ -46,6 +46,27 @@ const RegisteredAccountsPage = () => {
     fetchUsers();
   }, [token, barangay, users]);
 
+  const handleVerification = async (id) => {
+    try {
+      if (!window.confirm("Are you sure you want to verified this user!"))
+        return;
+      await axios.put(
+        `${import.meta.env.VITE_BWIMS_API_KEY}/api/users/${id}`,
+        {
+          isVerified: true,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert("User verify succesfully!");
+      fetchUsers();
+    } catch (error) {
+      alert("Error deleting user:", error);
+    }
+  };
   const handleDelete = async (id) => {
     try {
       if (!window.confirm("Are you sure you want to delete this user!")) return;
@@ -64,7 +85,7 @@ const RegisteredAccountsPage = () => {
     }
   };
 
-  const filteredUsers = users
+  const filteredData = users
     .filter(
       (user) =>
         user.fName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -78,7 +99,7 @@ const RegisteredAccountsPage = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredUsers.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -106,6 +127,7 @@ const RegisteredAccountsPage = () => {
                 <th>Email</th>
                 <th>Access</th>
                 <th>Status</th>
+                <th>Verified</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -116,6 +138,7 @@ const RegisteredAccountsPage = () => {
                   <td>{user.email}</td>
                   <td>{user.role}</td>
                   <td>{user.accountStatus}</td>
+                  <td>{user.isVerified ? "true" : "false"}</td>
                   <td className="d-flex gap-1">
                     <Link
                       to={`/e-services/user-details/${user._id}`}
@@ -123,6 +146,14 @@ const RegisteredAccountsPage = () => {
                     >
                       Details
                     </Link>
+                    {!user.isVerified && (
+                      <Button
+                        variant="success"
+                        onClick={() => handleVerification(user._id)}
+                      >
+                        Verify
+                      </Button>
+                    )}
                     <Button
                       variant="danger"
                       onClick={() => handleDelete(user._id)}
@@ -136,17 +167,18 @@ const RegisteredAccountsPage = () => {
           </Table>
         </div>
       )}
-
-      <ItemsPerPage
-        itemsPerPage={itemsPerPage}
-        handleItemsPerPageChange={handleItemsPerPageChange}
-        length={users.length}
-      />
-
-      <Pagination
-        totalPages={Math.ceil(currentItems.length / itemsPerPage)}
-        paginate={paginate}
-      />
+      <div className="d-flex justify-content-between">
+        <ItemsPerPage
+          itemsPerPage={itemsPerPage}
+          handleItemsPerPageChange={handleItemsPerPageChange}
+          length={users.length}
+        />
+        <Pagination
+          totalPages={Math.ceil(filteredData.length / itemsPerPage)}
+          currentPage={currentPage}
+          paginate={paginate}
+        />
+      </div>
     </Container>
   );
 };

@@ -6,7 +6,6 @@ const useBarangayData = () => {
   const [barangayData, setBarangayData] = useState(null);
   const [loading, setLoading] = useState(true);
   const barangay = Cookies.get("barangay");
-  const token = Cookies.get("token");
 
   const filteredBarangayData = barangayData && barangayData.filter((barangays) => barangays.name === barangay);
 
@@ -25,7 +24,7 @@ const useBarangayData = () => {
     };
 
     fetchData();
-  }, [token, barangay, barangayData, filteredBarangayData]);
+  }, [ barangay, barangayData, filteredBarangayData]);
 
   
 

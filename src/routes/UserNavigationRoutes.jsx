@@ -7,7 +7,6 @@ const userNavigationRoutes = [
   { name: 'Announcements', path: '/e-services/announcements', icon: FaBell },
   { name: 'My Profile', path: '/e-services/profile', icon: FaUser },
   { name: 'Edit Password', path: '/e-services/edit-password', icon: FaKey },
-  { name: 'E-Services', path: '/e-services/services', icon: FaFileUpload },
   { name: 'My Requests', path: '/e-services/my-requests', icon: FaEnvelopeOpenText },
 ];
 

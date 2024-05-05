@@ -26,6 +26,7 @@ const ProfilePage = () => {
     fName: "",
     mName: "",
     lName: "",
+    extensionName: "",
     email: "",
     contactNo: "",
     birthday: "",
@@ -39,6 +40,7 @@ const ProfilePage = () => {
     isHeadOfFamily: false,
     isRegisteredVoter: false,
     isEmployed: false,
+    is4ps: false,
     address: {
       street: "",
       houseNumber: 0,
@@ -49,6 +51,64 @@ const ProfilePage = () => {
     },
   });
 
+  const [formData, setFormData] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmNewPassword: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (loading) {
+      return;
+    }
+
+    setLoading(true);
+
+    const { oldPassword, newPassword, confirmNewPassword } = formData;
+
+    if (newPassword !== confirmNewPassword) {
+      alert("New Passwords do not match!");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      await axios.put(
+        `${
+          import.meta.env.VITE_BWIMS_API_KEY
+        }/api/users/changePassword/${userId}`,
+        {
+          oldPassword,
+          newPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setFormData({
+        oldPassword: "",
+        newPassword: "",
+        confirmNewPassword: "",
+      });
+      alert("Password changed successfully!");
+      setLoading(false);
+    } catch (error) {
+      alert(`Error changing password: ${error.message}`);
+      setLoading(false);
+    }
+  };
   const fetchUserData = async () => {
     try {
       const response = await axios.get(
@@ -84,6 +144,7 @@ const ProfilePage = () => {
         fName: userData.fName || "",
         mName: userData.mName || "",
         lName: userData.lName || "",
+        extensionName: userData.extensionName || "",
         email: userData.email || "",
         contactNo: userData.contactNo || "",
         birthday: userData.birthday
@@ -99,6 +160,7 @@ const ProfilePage = () => {
         isHeadOfFamily: userData.isHeadOfFamily || false,
         isRegisteredVoter: userData.isRegisteredVoter || false,
         isEmployed: userData.isEmployed || false,
+        is4ps: userData.is4ps || false,
         address: {
           street: userData.address?.street || "",
           houseNumber: userData.address?.houseNumber || 0,
@@ -256,336 +318,400 @@ const ProfilePage = () => {
 
   if (loading) return <Loading />;
   return (
-    <Container>
-      <Card>
-        <CardHeader className="bg-success text-white">
-          Account details
-        </CardHeader>
-        <CardBody>
-          <Form onSubmit={handleUpdateForm}>
-            <Row>
-              <Col className="d-flex flex-column justify-content-center align-items-center">
-                <Image
-                  src={
-                    userData.profilePic ||
-                    "https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg"
-                  }
-                  width={300}
-                  height={300}
-                  style={{
-                    objectFit: "cover",
-                  }}
-                  roundedCircle
-                />
-                <div>
-                  <Form.Group controlId="formFile" className="mb-3">
-                    <Form.Label>Upload Image</Form.Label>
-                    <Form.Control
-                      type="file"
-                      onChange={(event) =>
-                        setImageUpload(event.target.files[0])
-                      }
-                    />
-                  </Form.Group>
-                  <Button onClick={handleProfilePic}>Save Profile Pic</Button>
-                </div>
-              </Col>
-              <Col>
-                <Row className="mb-3">
-                  <h4>Personal Info</h4>
-                  <Col>
-                    <Form.Label>
-                      First Name:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="fName"
-                      value={user.fName}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Col>
-                  <Col>
-                    <Form.Label>
-                      Middle Name:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="mName"
-                      value={user.mName}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Col>
-                  <Col>
-                    <Form.Label>
-                      Last Name:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="lName"
-                      value={user.lName}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Col>
-                </Row>
+    <>
+      <Container>
+        <Card>
+          <CardHeader className="bg-success text-white">
+            Account details
+          </CardHeader>
+          <CardBody>
+            <Form onSubmit={handleUpdateForm}>
+              <Row>
+                <Col className="d-flex flex-column justify-content-center align-items-center">
+                  <Image
+                    src={
+                      userData.profilePic ||
+                      "https://t4.ftcdn.net/jpg/00/64/67/27/360_F_64672736_U5kpdGs9keUll8CRQ3p3YaEv2M6qkVY5.jpg"
+                    }
+                    width={300}
+                    height={300}
+                    style={{
+                      objectFit: "cover",
+                    }}
+                    roundedCircle
+                  />
+                  <div>
+                    <Form.Group controlId="formFile" className="mb-3">
+                      <Form.Label>Upload Image</Form.Label>
+                      <Form.Control
+                        type="file"
+                        onChange={(event) =>
+                          setImageUpload(event.target.files[0])
+                        }
+                      />
+                    </Form.Group>
+                    <Button onClick={handleProfilePic}>Save Profile Pic</Button>
+                  </div>
+                </Col>
+                <Col>
+                  <Row className="mb-3">
+                    <h4>Personal Info</h4>
+                    <Col>
+                      <Form.Label>
+                        <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                        First Name:
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="fName"
+                        value={user.fName}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>Middle Name:</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="mName"
+                        value={user.mName}
+                        onChange={handleInputChange}
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>
+                        <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                        Last Name:
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="lName"
+                        value={user.lName}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>Extension:</Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="extensionName"
+                        value={user.extensionName}
+                        onChange={handleInputChange}
+                      />
+                    </Col>
+                  </Row>
 
-                <Row className="mb-3">
-                  <Col>
-                    <Form.Label>
-                      Nationality:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="nationality"
-                      value={user.nationality}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Col>
-                  <Col>
-                    <Form.Label>
-                      Status:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="status"
-                      value={user.status}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Col>
-                  <Col>
-                    <Form.Label>
-                      Gender:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
-                    </Form.Label>
-                    <Form.Control
-                      as="select"
-                      name="sex"
-                      value={user.sex}
-                      onChange={handleInputChange}
-                      required
-                    >
-                      <option value="">Select your sex</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                    </Form.Control>
-                  </Col>
-                </Row>
+                  <Row className="mb-3">
+                    <Col>
+                      <Form.Label>
+                        <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                        Nationality:
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="nationality"
+                        value={user.nationality}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>
+                        <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                        Status:
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="status"
+                        value={user.status}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>
+                        <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                        Gender:
+                      </Form.Label>
+                      <Form.Control
+                        as="select"
+                        name="sex"
+                        value={user.sex}
+                        onChange={handleInputChange}
+                        required
+                      >
+                        <option value="">Select your gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </Form.Control>
+                    </Col>
+                  </Row>
 
-                <Row className="mb-3">
-                  <Col>
-                    <Form.Label>
-                      Birthday:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
-                    </Form.Label>
-                    <Form.Control
-                      type="date"
-                      name="birthday"
-                      value={user.birthday}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Col>
-                  <Col>
-                    <Form.Label>
-                      Birthplace:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
-                    </Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="birthplace"
-                      value={user.birthplace}
-                      onChange={handleInputChange}
-                      required
-                    />
-                  </Col>
-                </Row>
+                  <Row className="mb-3">
+                    <Col>
+                      <Form.Label>
+                        <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                        Birthday:
+                      </Form.Label>
+                      <Form.Control
+                        type="date"
+                        name="birthday"
+                        value={user.birthday}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>
+                        <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                        Birthplace:
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        name="birthplace"
+                        value={user.birthplace}
+                        onChange={handleInputChange}
+                        required
+                      />
+                    </Col>
+                  </Row>
 
-                <Row className="mb-3">
-                  <Col>
-                    <Form.Check
-                      type="checkbox"
-                      label="Is Head of Family"
-                      name="isHeadOfFamily"
-                      checked={user.isHeadOfFamily}
-                      onChange={handleCheckboxChange}
-                    />
-                  </Col>
-                  <Col>
-                    <Form.Check
-                      type="checkbox"
-                      label="Is Registered Voter"
-                      name="isRegisteredVoter"
-                      checked={user.isRegisteredVoter}
-                      onChange={handleCheckboxChange}
-                    />
-                  </Col>
-                  <Col>
-                    <Form.Check
-                      type="checkbox"
-                      label="Is Employed"
-                      name="isEmployed"
-                      checked={user.isEmployed}
-                      onChange={handleCheckboxChange}
-                    />
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-            <hr />
-            <h4>Contact Info</h4>
-            <Row className="mb-3">
-              <Col>
+                  <Row className="mb-3">
+                    <Col>
+                      <Form.Check
+                        type="checkbox"
+                        label="Head of Family"
+                        name="isHeadOfFamily"
+                        checked={user.isHeadOfFamily}
+                        onChange={handleCheckboxChange}
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Check
+                        type="checkbox"
+                        label="Registered Voter"
+                        name="isRegisteredVoter"
+                        checked={user.isRegisteredVoter}
+                        onChange={handleCheckboxChange}
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Check
+                        type="checkbox"
+                        label="Employed"
+                        name="isEmployed"
+                        checked={user.isEmployed}
+                        onChange={handleCheckboxChange}
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Check
+                        type="checkbox"
+                        label="4ps Beneficiary"
+                        name="is4ps"
+                        checked={user.is4ps}
+                        onChange={handleCheckboxChange}
+                      />
+                    </Col>
+                  </Row>
+                </Col>
+              </Row>
+              <hr />
+              <h4>Contact Info</h4>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>
+                    <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                    Email:
+                  </Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
+                    value={user.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Col>
+                <Col>
+                  <Form.Label>
+                    <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                    Contact No:
+                  </Form.Label>
+                  <Form.Control
+                    type="tel"
+                    name="contactNo"
+                    value={user.contactNo}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </Col>
+              </Row>
+              <hr />
+              <h4>Occupation</h4>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>Company Name:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="companyName"
+                    value={user.companyName}
+                    onChange={handleInputChange}
+                  />
+                </Col>
+                <Col>
+                  <Form.Label>Position:</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="position"
+                    value={user.position}
+                    onChange={handleInputChange}
+                  />
+                </Col>
+                <Col>
+                  <Form.Label>
+                    <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                    Salary Range:
+                  </Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="salaryRange"
+                    value={user.salaryRange}
+                    onChange={handleInputChange}
+                    required
+                  >
+                    <option value="5,000 below">5,000 below</option>
+                    <option value="5,000 - 10,000">5,000 - 10,000</option>
+                    <option value="10,000 - 30,000 ">10,000 - 30,000 </option>
+                    <option value="30,000 above">30,000 above</option>
+                  </Form.Control>
+                </Col>
+              </Row>
+              <hr />
+
+              <h4>Permanent Address</h4>
+              <Row className="mb-3">
+                <Col>
+                  <Form.Label>House Number: </Form.Label>
+                  <Form.Control
+                    type="number"
+                    name="houseNumber"
+                    value={user.address.houseNumber}
+                    onChange={(e) =>
+                      handleAddressChange({
+                        target: { name: "houseNumber", value: e.target.value },
+                      })
+                    }
+                  />
+                </Col>
+                <Col>
+                  <Form.Label>Street: </Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="street"
+                    value={user.address.street}
+                    onChange={handleAddressChange}
+                  />
+                </Col>
+                <Col>
+                  <Form.Label>
+                    <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                    Barangay:
+                  </Form.Label>
+                  <Form.Control
+                    as="select"
+                    name="barangay"
+                    value={user.address.barangay}
+                    onChange={handleAddressChange}
+                    required
+                  >
+                    <option value="">Select your barangay</option>
+                    {barangays.map((barangay) => (
+                      <option key={barangay} value={barangay}>
+                        {barangay}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Col>
+              </Row>
+
+              <Button
+                type="submit"
+                variant="success"
+                size="lg"
+                className="fw-semibold"
+              >
+                Submit
+              </Button>
+            </Form>
+          </CardBody>
+        </Card>
+      </Container>
+      <Container className="d-flex justify-content-center mt-2">
+        <Card className="w-100">
+          <CardHeader className="bg-success text-white">
+            Edit Password
+          </CardHeader>
+          <CardBody>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-2">
                 <Form.Label>
-                  Email:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span> Old
+                  Password
                 </Form.Label>
                 <Form.Control
-                  type="email"
-                  name="email"
-                  value={user.email}
-                  onChange={handleInputChange}
+                  type="password"
+                  name="oldPassword"
+                  value={formData.oldPassword}
+                  onChange={handleChange}
                   required
                 />
-              </Col>
-              <Col>
+              </Form.Group>
+              <Form.Group className="mb-2">
                 <Form.Label>
-                  Contact No:
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  {" "}
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span> New
+                  Password
                 </Form.Label>
                 <Form.Control
-                  type="tel"
-                  name="contactNo"
-                  value={user.contactNo}
-                  onChange={handleInputChange}
+                  type="password"
+                  name="newPassword"
+                  value={formData.newPassword}
+                  onChange={handleChange}
                   required
                 />
-              </Col>
-            </Row>
-            <hr />
-            <h4>Occupation</h4>
-            <Row className="mb-3">
-              <Col>
-                <Form.Label>Company Name:</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="companyName"
-                  value={user.companyName}
-                  onChange={handleInputChange}
-                />
-              </Col>
-              <Col>
-                <Form.Label>Position:</Form.Label>
-                <Form.Control
-                  type="text"
-                  name="position"
-                  value={user.position}
-                  onChange={handleInputChange}
-                />
-              </Col>
-              <Col>
+              </Form.Group>
+              <Form.Group className="mb-2">
                 <Form.Label>
-                  Salary Range:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span> Confirm
+                  New Password
                 </Form.Label>
                 <Form.Control
-                  as="select"
-                  name="salaryRange"
-                  value={user.salaryRange}
-                  onChange={handleInputChange}
+                  type="password"
+                  name="confirmNewPassword"
+                  value={formData.confirmNewPassword}
+                  onChange={handleChange}
                   required
+                />
+                <Button
+                  type="submit"
+                  variant="success"
+                  className="w-25 fw-bold mt-3"
                 >
-                  <option value="5,000 below">5,000 below</option>
-                  <option value="5,000 - 10,000">5,000 - 10,000</option>
-                  <option value="10,000 - 30,000 ">10,000 - 30,000 </option>
-                  <option value="30,000 above">30,000 above</option>
-                </Form.Control>
-              </Col>
-            </Row>
-            <hr />
-
-            <h4>Permanent Address</h4>
-            <Row className="mb-3">
-              <Col>
-                <Form.Label>House Number: </Form.Label>
-                <Form.Control
-                  type="number"
-                  name="houseNumber"
-                  value={user.address.houseNumber}
-                  onChange={(e) =>
-                    handleAddressChange({
-                      target: { name: "houseNumber", value: e.target.value },
-                    })
-                  }
-                />
-              </Col>
-              <Col>
-                <Form.Label>Street: </Form.Label>
-                <Form.Control
-                  type="text"
-                  name="street"
-                  value={user.address.street}
-                  onChange={handleAddressChange}
-                />
-              </Col>
-              <Col>
-                <Form.Label>
-                  Barangay:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
-                </Form.Label>
-                <Form.Control
-                  as="select"
-                  name="barangay"
-                  value={user.address.barangay}
-                  onChange={handleAddressChange}
-                  required
-                >
-                  <option value="">Select your barangay</option>
-                  {barangays.map((barangay) => (
-                    <option key={barangay} value={barangay}>
-                      {barangay}
-                    </option>
-                  ))}
-                </Form.Control>
-              </Col>
-            </Row>
-
-            <Button
-              type="submit"
-              variant="success"
-              size="lg"
-              className="fw-semibold"
-            >
-              Submit
-            </Button>
-          </Form>
-        </CardBody>
-      </Card>
-    </Container>
+                  {loading ? (
+                    <Spinner animation="border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                  ) : (
+                    "Save"
+                  )}
+                </Button>
+              </Form.Group>
+            </Form>
+          </CardBody>
+        </Card>
+      </Container>
+    </>
   );
 };
 

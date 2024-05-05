@@ -73,6 +73,16 @@ const CertificateOfResidencyPage = () => {
           },
         }
       );
+
+      await axios.delete(
+        `${import.meta.env.VITE_BWIMS_API_KEY}/api/forms/residency/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       await sendEmail({
         to_email: email,
         subject: "Certificate of Residency Form",

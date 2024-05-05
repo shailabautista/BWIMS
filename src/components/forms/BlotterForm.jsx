@@ -19,7 +19,6 @@ import Loading from "../Loading";
 
 const BlotterForm = () => {
   const token = Cookies.get("token");
-  const { userData, loading: userDataLoading } = useCurrentUserData();
   const [loading, setLoading] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
   const [formData, setFormData] = useState({
@@ -27,7 +26,7 @@ const BlotterForm = () => {
     middleName: "",
     lastName: "",
     contactNo: "",
-    age: 1,
+    age: 18,
     address: {
       street: "",
       houseNumber: "",
@@ -40,27 +39,6 @@ const BlotterForm = () => {
     narrativeReports: "",
     userId: "",
   });
-
-  useEffect(() => {
-    if (userData) {
-      setFormData((prevData) => ({
-        ...prevData,
-        firstName: userData.fName || "",
-        middleName: userData.mName || "",
-        lastName: userData.lName || "",
-        contactNo: userData.contactNo || "",
-        userId: userData._id || "",
-        address: {
-          street: userData.address.street || "",
-          houseNumber: userData.address.houseNumber || "",
-          barangay: userData.address.barangay || "",
-          municipality: userData.address.municipality || "",
-          province: userData.address.province || "",
-          country: userData.address.country || "",
-        },
-      }));
-    }
-  }, [userData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -129,7 +107,6 @@ const BlotterForm = () => {
     }
   };
 
-  if (userDataLoading) return <Loading />;
 
   return (
     <div>
@@ -151,7 +128,7 @@ const BlotterForm = () => {
               <Col>
                 <Form.Label>
                   First Name:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -165,7 +142,7 @@ const BlotterForm = () => {
               <Col>
                 <Form.Label>
                   Middle Name:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -179,7 +156,7 @@ const BlotterForm = () => {
               <Col>
                 <Form.Label>
                   Last Name:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -195,7 +172,7 @@ const BlotterForm = () => {
             <Form.Group className="mb-3">
               <Form.Label>
                 Age
-                <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                <span style={{ color: "red", marginLeft: 5 }}>*</span>
               </Form.Label>
               <Form.Control
                 type="number"
@@ -207,7 +184,7 @@ const BlotterForm = () => {
               />
               <Form.Label>
                 Contact Number:{" "}
-                <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                <span style={{ color: "red", marginLeft: 5 }}>*</span>
               </Form.Label>
               <Form.Control
                 type="text"
@@ -244,7 +221,7 @@ const BlotterForm = () => {
               <Col>
                 <Form.Label>
                   Barangay:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -261,7 +238,7 @@ const BlotterForm = () => {
             <Col>
               <Form.Label>
                 Date:{" "}
-                <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                <span style={{ color: "red", marginLeft: 5 }}>*</span>
               </Form.Label>
               <Form.Control
                 type="date"
@@ -275,7 +252,7 @@ const BlotterForm = () => {
             <Form.Group className="mt-3 mb-3">
               <Form.Label>
                 Narrative Reports:{" "}
-                <span style={{ color: "red", marginLeft: 5 }}>*Required</span>{" "}
+                <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
               </Form.Label>
               <Form.Control
                 as="textarea"

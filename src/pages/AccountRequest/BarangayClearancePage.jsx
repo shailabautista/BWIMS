@@ -77,6 +77,15 @@ const BarangayClearancePage = () => {
           },
         }
       );
+
+      await axios.delete(
+        `${import.meta.env.VITE_BWIMS_API_KEY}/api/forms/barangayClearance/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       await sendEmail({
         to_email: email,
         subject: "Barangay Clearance Form",

@@ -15,8 +15,6 @@ const ServicesPage = () => {
     { id: 2, title: 'Business Permit', image: BusinessPermit, path: `/e-services/business-permit/form/${userId}`},
     { id: 3, title: 'Certificate of Indigency', image: CertificateOfIndigency, path: `/e-services/certificate-of-indigency/form/${userId}`},
     { id: 4, title: 'Certificate of Residency', image: CertificateOfResidency, path: `/e-services/certificate-of-residency/form/${userId}`},
-    { id: 5, title: 'Blotter', image: Blotter, path: `/e-services/blotter/form/${userId}`},
-
   ];
 
   return (

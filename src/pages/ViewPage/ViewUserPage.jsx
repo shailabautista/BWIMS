@@ -25,6 +25,7 @@ const ViewUserPage = () => {
     fName: "",
     mName: "",
     lName: "",
+    extensionName: "",
     email: "",
     contactNo: "",
     birthday: "",
@@ -38,6 +39,7 @@ const ViewUserPage = () => {
     isHeadOfFamily: false,
     isRegisteredVoter: false,
     isEmployed: false,
+    is4ps: false,
     address: {
       street: "",
       houseNumber: 0,
@@ -119,6 +121,7 @@ const ViewUserPage = () => {
         fName: userData.fName || "",
         mName: userData.mName || "",
         lName: userData.lName || "",
+        extensionName: userData.extensionName || "",
         email: userData.email || "",
         contactNo: userData.contactNo || "",
         birthday: userData.birthday
@@ -134,6 +137,7 @@ const ViewUserPage = () => {
         isHeadOfFamily: userData.isHeadOfFamily || false,
         isRegisteredVoter: userData.isRegisteredVoter || false,
         isEmployed: userData.isEmployed || false,
+        is4ps: userData.is4ps || false,
         address: {
           street: userData.address?.street || "",
           houseNumber: userData.address?.houseNumber || 0,
@@ -236,9 +240,7 @@ const ViewUserPage = () => {
         <CardBody>
           <Form onSubmit={handleUpdateForm}>
             <Row>
-              <Col
-                className="d-flex justify-content-center align-items-center"
-              >
+              <Col className="d-flex justify-content-center align-items-center">
                 <Image
                   src={
                     userData.profilePic ||
@@ -253,10 +255,8 @@ const ViewUserPage = () => {
                   <h4>Personal Info</h4>
                   <Col>
                     <Form.Label>
-                      First Name:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
+                      <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                      First Name:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -267,12 +267,7 @@ const ViewUserPage = () => {
                     />
                   </Col>
                   <Col>
-                    <Form.Label>
-                      Middle Name:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
-                    </Form.Label>
+                    <Form.Label>Middle Name:</Form.Label>
                     <Form.Control
                       type="text"
                       name="mName"
@@ -283,10 +278,8 @@ const ViewUserPage = () => {
                   </Col>
                   <Col>
                     <Form.Label>
-                      Last Name:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
+                      <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                      Last Name:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -296,15 +289,23 @@ const ViewUserPage = () => {
                       required
                     />
                   </Col>
+                  <Col>
+                    <Form.Label>Extension:</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="extensionName"
+                      value={user.extensionName}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </Col>
                 </Row>
 
                 <Row className="mb-3">
                   <Col>
                     <Form.Label>
-                      Nationality:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
+                      <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                      Nationality:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -316,10 +317,8 @@ const ViewUserPage = () => {
                   </Col>
                   <Col>
                     <Form.Label>
-                      Status:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
+                      <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                      Status:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -331,10 +330,8 @@ const ViewUserPage = () => {
                   </Col>
                   <Col>
                     <Form.Label>
-                      Gender:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
+                      <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                      Gender:
                     </Form.Label>
                     <Form.Control
                       as="select"
@@ -353,10 +350,8 @@ const ViewUserPage = () => {
                 <Row className="mb-3">
                   <Col>
                     <Form.Label>
-                      Birthday:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
+                      <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                      Birthday:
                     </Form.Label>
                     <Form.Control
                       type="date"
@@ -368,10 +363,8 @@ const ViewUserPage = () => {
                   </Col>
                   <Col>
                     <Form.Label>
-                      Birthplace:{" "}
-                      <span style={{ color: "red", marginLeft: 5 }}>
-                        *Required
-                      </span>
+                      <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                      Birthplace:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -411,6 +404,15 @@ const ViewUserPage = () => {
                       onChange={handleCheckboxChange}
                     />
                   </Col>
+                  <Col>
+                    <Form.Check
+                      type="checkbox"
+                      label="4ps Beneficiary"
+                      name="is4ps"
+                      checked={user.is4ps}
+                      onChange={handleCheckboxChange}
+                    />
+                  </Col>
                 </Row>
               </Col>
             </Row>
@@ -419,8 +421,7 @@ const ViewUserPage = () => {
             <Row className="mb-3">
               <Col>
                 <Form.Label>
-                  Email:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span> Email:
                 </Form.Label>
                 <Form.Control
                   type="email"
@@ -432,8 +433,8 @@ const ViewUserPage = () => {
               </Col>
               <Col>
                 <Form.Label>
-                  Contact No:
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span> Contact
+                  No:
                 </Form.Label>
                 <Form.Control
                   type="tel"
@@ -467,8 +468,8 @@ const ViewUserPage = () => {
               </Col>
               <Col>
                 <Form.Label>
-                  Salary Range:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span> Salary
+                  Range:
                 </Form.Label>
                 <Form.Control
                   as="select"
@@ -512,8 +513,8 @@ const ViewUserPage = () => {
               </Col>
               <Col>
                 <Form.Label>
-                  Barangay:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                  Barangay:
                 </Form.Label>
                 <Form.Control
                   as="select"

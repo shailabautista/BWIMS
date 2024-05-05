@@ -1,23 +1,130 @@
 import { useState, useEffect } from "react";
 import { Spinner, Container, Card } from "react-bootstrap";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { PDFViewer, Document, Page, Text } from "@react-pdf/renderer";
+
+const PDFDocument = ({ formData, barangay }) => (
+  <Document>
+    <Page
+      style={{
+        fontSize: 12,
+        textAlign: "center",
+      }}
+    >
+      <Text
+        style={{
+          fontSize: 12,
+          marginBottom: 2,
+        }}
+      >
+        Republic of the Philippines
+      </Text>
+      <Text
+        style={{
+          fontSize: 12,
+          marginBottom: 2,
+        }}
+      >
+        Province of Pangasinan
+      </Text>
+      <Text
+        style={{
+          fontSize: 12,
+          marginBottom: 2,
+        }}
+      >
+        Municipality of Dagupan City
+      </Text>
+      <Text
+        style={{
+          fontSize: 12,
+          marginBottom: 10,
+        }}
+      >
+        Barangay {barangay}
+      </Text>
+      <Text
+        style={{
+          fontSize: 15,
+          marginBottom: 10,
+        }}
+      >
+        OFFICE OF THE PUNONG BARANGAY
+      </Text>
+      <Text
+        style={{
+          fontSize: 25,
+          marginBottom: 20,
+        }}
+      >
+        CLEARANCE
+      </Text>
+      <Text style={{
+          textAlign: "left",
+          marginBottom: 20,
+        }}>TO WHOM IT MAY CONCERN:</Text>
+      <Text style={{
+          marginBottom: 20,
+        }}>
+        {" "}{" "}{" "}This Barangay {barangay}, Dagupan City, has no objection to the 
+        renewal for CY2023 for the
+      </Text>
+      <Text
+        style={{
+          fontSize: 25,
+          marginBottom: 12,
+        }}
+      >
+        BUSINESS PERMIT
+      </Text>
+      <Text style={{
+          marginBottom: 12,
+        }}>
+          to
+      </Text>
+      <Text style={{
+          marginBottom: 20,
+        }}>
+          {formData.lastName}, {formData.firstName} {formData.middleName}
+      </Text>
+      <Text style={{
+          marginBottom: 20,
+        }}>
+        {" "}{" "}{" "}The issuance of this Clearance is subject to the condition that the above  
+        name has compiled with and shall continue to comply with all existing laws, rules, & regulations
+        governing the holding of the same.
+      </Text>
+      <Text style={{
+          marginBottom: 20,
+        }}>
+        Issued {new Date(formData.date).toLocaleString()} at {barangay} Barangay Hall, Dagupan City.
+      </Text>
+    </Page>
+  </Document>
+);
 
 const ViewBusinessPermitPage = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState(null);
-  const token = Cookies.get('token');
+  const token = Cookies.get("token");
+  const barangay = Cookies.get("barangay");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BWIMS_API_KEY}/api/forms/businessPermit/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_BWIMS_API_KEY
+          }/api/forms/businessPermit/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           }
-        });
+        );
         setFormData(response.data);
         setLoading(false);
       } catch (error) {
@@ -46,28 +153,9 @@ const ViewBusinessPermitPage = () => {
               <Card.Header>Business Permit Details</Card.Header>
               <Card.Body>
                 <Card.Text>
-                  <p>Business Name: {formData.businessName}</p>
-                  {formData.businessType && <p>Business Type: {formData.businessType}</p>}
-
-                  <p>First Name: {formData.firstName}</p>
-                  <p>Middle Name: {formData.middleName}</p>
-                  <p>Last Name: {formData.lastName}</p>
-                  <p>Contact No: {formData.contactNo}</p>
-                  <p>Date: {new Date(formData.date).toLocaleString()}</p>
-                  <p>Purpose: {formData.purpose}</p>
-                  <p>Status: {formData.status}</p>
-                  <p>Pick Up: {formData.pickUp}</p>
-                  <p>Color: {formData.color}</p>
-                  <p>{formData.pickUp === "delivery" && `Fee: ${formData.fee}`}</p>
-                  <p>Address: {`
-                  ${formData.address.houseNumber && `#${formData.address.houseNumber}, `} 
-                  ${formData.address.street && `${formData.address.street}, `}  
-                  ${formData.address.barangay && `Brgy.${formData.address.barangay}, `} 
-                  ${formData.address.municipality && `${formData.address.municipality}, `} 
-                  ${formData.address.province && `${formData.address.province}, `} 
-                  ${formData.address.country && `${formData.address.country} `} 
-
-                  `}</p>
+                  <PDFViewer width="100%" height="600">
+                    <PDFDocument formData={formData} barangay={barangay} />
+                  </PDFViewer>
                 </Card.Text>
               </Card.Body>
             </Card>

@@ -13,6 +13,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import useCurrentUserData from "../../hooks/useCurrentUserData";
 import Loading from "../Loading";
+import { purposeOptions } from "../../data/purposeOptions";
 
 const BusinessPermitForm = () => {
   const token = Cookies.get("token");
@@ -104,7 +105,7 @@ const BusinessPermitForm = () => {
           },
         }
       );
-      toast.success("Barangay Clearance form submitted successfully!");
+      toast.success("Business Permit form submitted successfully!");
       setFormData({
         ...formData,
         businessName: "",
@@ -135,7 +136,7 @@ const BusinessPermitForm = () => {
               <Col>
                 <Form.Label>
                   Business Name:
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -147,9 +148,7 @@ const BusinessPermitForm = () => {
                 />
               </Col>
               <Col>
-                <Form.Label>
-                  Business Type: (Optional)
-                </Form.Label>
+                <Form.Label>Business Type: (Optional)</Form.Label>
                 <Form.Control
                   type="text"
                   name="businessType"
@@ -165,7 +164,7 @@ const BusinessPermitForm = () => {
               <Col>
                 <Form.Label>
                   First Name:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -179,7 +178,7 @@ const BusinessPermitForm = () => {
               <Col>
                 <Form.Label>
                   Middle Name:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -193,7 +192,7 @@ const BusinessPermitForm = () => {
               <Col>
                 <Form.Label>
                   Last Name:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -209,7 +208,7 @@ const BusinessPermitForm = () => {
             <Form.Group className="mb-3">
               <Form.Label>
                 Contact Number:{" "}
-                <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                <span style={{ color: "red", marginLeft: 5 }}>*</span>
               </Form.Label>
               <Form.Control
                 type="text"
@@ -246,7 +245,7 @@ const BusinessPermitForm = () => {
               <Col>
                 <Form.Label>
                   Barangay:{" "}
-                  <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
                   type="text"
@@ -264,28 +263,24 @@ const BusinessPermitForm = () => {
               <Row>
                 <Col>
                   <Form.Label>
-                    Pickup:{" "}
-                    <span style={{ color: "red", marginLeft: 5 }}>
-                      *Required
-                    </span>
+                    Document Fee:{" "}
+                    <span style={{ color: "red", marginLeft: 5 }}>*</span>
                   </Form.Label>
                   <Form.Control
                     as="select"
-                    name="pickUp"
-                    value={formData.pickUp}
+                    name="fee"
+                    value={formData.fee}
                     onChange={handleChange}
                     required
                   >
-                    <option value="pickUp">Pickup</option>
-                    <option value="delivery">Delivery</option>
+                    <option value={0}>Free</option>
+                    <option value={50}>₱ 50</option>
                   </Form.Control>
                 </Col>
                 <Col>
                   <Form.Label>
                     Color:{" "}
-                    <span style={{ color: "red", marginLeft: 5 }}>
-                      *Required
-                    </span>
+                    <span style={{ color: "red", marginLeft: 5 }}>*</span>
                   </Form.Label>
                   <Form.Control
                     as="select"
@@ -300,10 +295,7 @@ const BusinessPermitForm = () => {
                 </Col>
                 <Col>
                   <Form.Label>
-                    Date:{" "}
-                    <span style={{ color: "red", marginLeft: 5 }}>
-                      *Required
-                    </span>
+                    Date: <span style={{ color: "red", marginLeft: 5 }}>*</span>
                   </Form.Label>
                   <Form.Control
                     type="date"
@@ -315,25 +307,24 @@ const BusinessPermitForm = () => {
                 </Col>
               </Row>
             </Form.Group>
-            <p className="fw-bold">
-              If you choose delivery, please prepare your payment for only 70
-              pesos
-            </p>
 
             <Form.Group className="mb-3">
               <Form.Label>
-                Purpose:{" "}
-                <span style={{ color: "red", marginLeft: 5 }}>*Required</span>{" "}
+                Purpose: <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
               </Form.Label>
               <Form.Control
-                as="textarea"
-                rows={3}
+                as="select"
                 name="purpose"
-                placeholder="Purpose"
                 value={formData.purpose}
                 onChange={handleChange}
                 required
-              />
+              >
+                {purposeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </Form.Control>
             </Form.Group>
 
             <Button

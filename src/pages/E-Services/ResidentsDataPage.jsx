@@ -4,6 +4,16 @@ import { FaRegFileAlt } from "react-icons/fa";
 import Cookies from "js-cookie";
 import Loading from "../../components/Loading";
 import useUsersData from "../../hooks/useUsersData";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const ResidentsDataPage = () => {
   const { users, loading } = useUsersData();
@@ -18,67 +28,111 @@ const ResidentsDataPage = () => {
     {
       id: 1,
       title: "Brgy. Residents",
-      path: "/e-services/barangay-residents",
       data: filteredUsers.length,
+      path: "/e-services/barangay-residents",
     },
     {
       id: 2,
-      title: "Head of the family",
-      path: "/e-services/head-family",
+      title: "Head of the Family",
       data: filteredUsers.filter((user) => user.isHeadOfFamily).length,
+      path: "/e-services/head-family",
     },
     {
       id: 3,
       title: "Registered Voters",
-      path: "/e-services/registered-voters",
       data: filteredUsers.filter((user) => user.isRegisteredVoter).length,
+      path: "/e-services/registered-voters",
     },
     {
       id: 4,
-      title: "Male Residents",
-      path: "/e-services/male-residents",
+      title: "Male",
       data: filteredUsers.filter((user) => user.sex === "Male").length,
+      path: "/e-services/male-residents",
     },
     {
       id: 5,
-      title: "Female Residents",
-      path: "/e-services/female-residents",
+      title: "Female",
       data: filteredUsers.filter((user) => user.sex === "Female").length,
+      path: "/e-services/female-residents",
     },
     {
       id: 6,
-      title: "Low Class Residents",
-      path: "/e-services/lowclass-residents",
+      title: "Low Class",
       data: filteredUsers.filter(
-        (user) => user.salaryRange === "5,000 below" || user.salaryRange === "5,000 - 10,000" || user.salaryRange === "10,000 and less"
+        (user) =>
+          user.salaryRange === "5,000 below" ||
+          user.salaryRange === "5,000 - 10,000" ||
+          user.salaryRange === "10,000 and less"
       ).length,
+      path: "/e-services/male-residents",
     },
     {
       id: 7,
-      title: "Mid Class Residents",
-      path: "/e-services/midclass-residents",
+      title: "Mid Class",
       data: filteredUsers.filter(
         (user) => user.salaryRange === "10,000 - 30,000"
       ).length,
+      path: "/e-services/midclass-residents",
     },
     {
       id: 8,
-      title: "Upper Class Residents",
-      path: "/e-services/upperclass-residents",
+      title: "Upper Class",
       data: filteredUsers.filter((user) => user.salaryRange === "30,000 above")
         .length,
+      path: "/e-services/upperclass-residents",
+    },
+    {
+      id: 9,
+      title: "Senior",
+      data: filteredUsers.filter((user) => {
+        const birthDate = new Date(user.birthday);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (
+          monthDiff < 0 ||
+          (monthDiff === 0 && today.getDate() < birthDate.getDate())
+        ) {
+          age--;
+        }
+        return age >= 60;
+      }).length,
+      path: "/e-services/senior-citizen-residents",
+    },
+    {
+      id: 10,
+      title: "4ps Beneficiary",
+      data: filteredUsers.filter((user) => user.is4ps).length,
+      path: "/e-services/4ps-benificiary-residents",
     },
   ];
 
   if (loading) return <Loading />;
 
+  const chartData = contentData.map((item) => ({
+    name: item.title,
+    total: item.data,
+  }));
+
   return (
     <div className="d-flex justify-content-center">
-      <Container className="shadow-lg w-75 p-4 rounded-2">
+      <Container className="shadow-lg p-4 rounded-2">
         <h1 className="text-center mb-4 fs-4">
           Accumulated data for{" "}
           {barangay === "default" ? "Dagupan City" : barangay}
         </h1>
+        <div>
+          <ResponsiveContainer width="100%" height={400}>
+            <BarChart data={chartData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="total" fill="#198754" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
         <div className="d-flex flex-wrap justify-content-center align-items-center gap-4">
           {contentData.map((request) => (
             <Card

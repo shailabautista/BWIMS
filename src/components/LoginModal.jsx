@@ -38,8 +38,14 @@ const LoginModal = ({ show, handleClose, barangay }) => {
       );
 
       const { role, barangay: userBarangay } = response.data;
-      const { token, userId } = response.data;
+      const { token, userId, isVerified } = response.data;
 
+      if (!isVerified) {
+        toast.error(
+          `You are not verified yet! Please wait for admin for confirmation!`
+        );
+        return;
+      }
       if (role === "admin") {
         Cookies.set("role", role);
         Cookies.set("token", token);
@@ -49,6 +55,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
         return;
       }
 
+      
       if (barangay !== userBarangay) {
         toast.error(
           `You are not registered in this barangay! Please register first in ${barangay}`

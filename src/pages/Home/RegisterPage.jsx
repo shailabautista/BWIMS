@@ -11,6 +11,7 @@ const RegisterPage = () => {
     fName: "",
     mName: "",
     lName: "",
+    extensionName: "",
     email: "",
     birthday: "",
     birthplace: "",
@@ -23,6 +24,7 @@ const RegisterPage = () => {
     isHeadOfFamily: false,
     isRegisteredVoter: false,
     isEmployed: false,
+    is4ps: false,
     address: {
       street: "",
       houseNumber: 0,
@@ -171,8 +173,7 @@ const RegisterPage = () => {
         <Row className="mb-3">
           <Col>
             <Form.Label>
-              First Name:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> First Name:
             </Form.Label>
             <Form.Control
               type="text"
@@ -183,10 +184,7 @@ const RegisterPage = () => {
             />
           </Col>
           <Col>
-            <Form.Label>
-              Middle Name:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
-            </Form.Label>
+            <Form.Label>Middle Name:</Form.Label>
             <Form.Control
               type="text"
               name="mName"
@@ -197,8 +195,7 @@ const RegisterPage = () => {
           </Col>
           <Col>
             <Form.Label>
-              Last Name:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Last Name:
             </Form.Label>
             <Form.Control
               type="text"
@@ -208,13 +205,23 @@ const RegisterPage = () => {
               required
             />
           </Col>
+          <Col>
+            <Form.Label>Extension:</Form.Label>
+            <Form.Control
+              type="text"
+              name="extensionName"
+              value={user.extensionName}
+              onChange={handleInputChange}
+              required
+            />
+          </Col>
         </Row>
 
         <Row className="mb-3">
           <Col>
             <Form.Label>
-              Nationality:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+              Nationality:
             </Form.Label>
             <Form.Control
               type="text"
@@ -226,8 +233,7 @@ const RegisterPage = () => {
           </Col>
           <Col>
             <Form.Label>
-              Status:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Status:
             </Form.Label>
             <Form.Control
               type="text"
@@ -239,8 +245,7 @@ const RegisterPage = () => {
           </Col>
           <Col>
             <Form.Label>
-              Gender:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Gender:
             </Form.Label>
             <Form.Control
               as="select"
@@ -249,7 +254,7 @@ const RegisterPage = () => {
               onChange={handleInputChange}
               required
             >
-              <option value="">Select your sex</option>
+              <option value="">Select your gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </Form.Control>
@@ -259,8 +264,7 @@ const RegisterPage = () => {
         <Row className="mb-3">
           <Col>
             <Form.Label>
-              Birthday:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Birthday:
             </Form.Label>
             <Form.Control
               type="date"
@@ -272,8 +276,7 @@ const RegisterPage = () => {
           </Col>
           <Col>
             <Form.Label>
-              Birthplace:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Birthplace:
             </Form.Label>
             <Form.Control
               type="text"
@@ -289,7 +292,7 @@ const RegisterPage = () => {
           <Col>
             <Form.Check
               type="checkbox"
-              label="Is Head of Family"
+              label="Head of Family"
               name="isHeadOfFamily"
               checked={user.isHeadOfFamily}
               onChange={handleCheckboxChange}
@@ -298,7 +301,7 @@ const RegisterPage = () => {
           <Col>
             <Form.Check
               type="checkbox"
-              label="Is Registered Voter"
+              label="Registered Voter"
               name="isRegisteredVoter"
               checked={user.isRegisteredVoter}
               onChange={handleCheckboxChange}
@@ -307,9 +310,18 @@ const RegisterPage = () => {
           <Col>
             <Form.Check
               type="checkbox"
-              label="Is Employed"
+              label="Employed"
               name="isEmployed"
               checked={user.isEmployed}
+              onChange={handleCheckboxChange}
+            />
+          </Col>
+          <Col>
+            <Form.Check
+              type="checkbox"
+              label="4ps Beneficiary"
+              name="is4ps"
+              checked={user.is4ps}
               onChange={handleCheckboxChange}
             />
           </Col>
@@ -337,9 +349,9 @@ const RegisterPage = () => {
           </Col>
           <Col>
             <Form.Label>
-              Salary Range:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
-            </Form.Label>{" "}
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Salary
+              Range:
+            </Form.Label>
             <Form.Control
               as="select"
               name="salaryRange"
@@ -382,8 +394,7 @@ const RegisterPage = () => {
           </Col>
           <Col>
             <Form.Label>
-              Barangay:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Barangay:
             </Form.Label>
             <Form.Control
               as="select"
@@ -408,8 +419,7 @@ const RegisterPage = () => {
         <Row className="mb-3">
           <Col>
             <Form.Label>
-              Email:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Email:
             </Form.Label>
             <Form.Control
               type="email"
@@ -421,8 +431,7 @@ const RegisterPage = () => {
           </Col>
           <Col>
             <Form.Label>
-              Contact No:
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Contact No:
             </Form.Label>
             <Form.Control
               type="tel"
@@ -437,8 +446,7 @@ const RegisterPage = () => {
         <Row className="mb-3">
           <Col>
             <Form.Label>
-              Password:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Password:
             </Form.Label>
             <Form.Control
               type="password"
@@ -450,8 +458,8 @@ const RegisterPage = () => {
           </Col>
           <Col>
             <Form.Label>
-              Confirm Password:{" "}
-              <span style={{ color: "red", marginLeft: 5 }}>*Required</span>
+              <span style={{ color: "red", marginLeft: 5 }}>*</span> Confirm
+              Password:
             </Form.Label>
             <Form.Control
               type="password"

@@ -8,7 +8,6 @@ const superAdminNavigationRoutes = [
   { name: 'Registered Accounts', path: '/e-services/registered-accounts', icon: FaUsers },
   { name: 'Residents Data', path: '/e-services/residents-data', icon:  FaHospitalUser },
   { name: 'My Profile', path: '/e-services/profile', icon: FaUser },
-  { name: 'Edit Password', path: '/e-services/edit-password', icon: FaKey },
   { name: 'Content Management', path: '/e-services/content-management', icon: FaFileAlt },
 ];
 

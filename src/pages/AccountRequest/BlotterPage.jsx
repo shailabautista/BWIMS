@@ -72,15 +72,17 @@ const BlotterPage = () => {
 
   const handleReject = async (id, email) => {
     try {
-      await axios.put(
+      if (!window.confirm("Are you sure you want to reject  this?")) return;
+
+      await axios.delete(
         `${import.meta.env.VITE_BWIMS_API_KEY}/api/forms/blotter/${id}`,
-        { status: "reject" },
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+
       await sendEmail({
         to_email: email,
         subject: "Blotter Form",

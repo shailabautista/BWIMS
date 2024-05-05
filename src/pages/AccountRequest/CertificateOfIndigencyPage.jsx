@@ -74,6 +74,15 @@ const CertificateOfIndigencyPage = () => {
           },
         }
       );
+      await axios.delete(
+        `${import.meta.env.VITE_BWIMS_API_KEY}/api/forms/indigency/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       await sendEmail({
         to_email: email,
         subject: "Certificate of Indigency Form",

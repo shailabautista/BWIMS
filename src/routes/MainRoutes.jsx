@@ -66,6 +66,9 @@ import BlotterPage from "../pages/AccountRequest/BlotterPage";
 import ViewBlotterPage from "../pages/ViewPage/ViewBlotterPage";
 import MyBlotterPage from "../pages/MyRequest/MyBlotterPage";
 import ResetPasswordPage from "../pages/Home/ResetPasswordPage";
+import BenificiaryPage from "../pages/ResidentsData/4psBenificiaryPage";
+import SeniorCitizenPage from "../pages/ResidentsData/SeniorCitizenPage";
+import CreateLogoPage from "../pages/ContentManagement/CreateLogoPage";
 
 export const mainRoutes = [
 
@@ -119,10 +122,6 @@ export const mainRoutes = [
         {
           path: "profile",
           element: <ProfilePage/>,
-        },
-        {
-          path: "edit-password",
-          element: <EditPasswordPage/>,
         },
         {
           path: "services",
@@ -281,7 +280,7 @@ export const mainRoutes = [
           element: <ViewUserPage/>,
         },
         {
-          path: "blotter/form/:id",
+          path: "blotter/form",
           element: <BlotterForm/>,
         },
         {
@@ -295,6 +294,18 @@ export const mainRoutes = [
         {
           path: "my-blotter",
           element: <MyBlotterPage/>,
+        },
+        {
+          path: "4ps-benificiary-residents",
+          element: <BenificiaryPage/>,
+        },
+        {
+          path: "senior-citizen-residents",
+          element: <SeniorCitizenPage/>,
+        },
+        {
+          path: "create-logo",
+          element: <CreateLogoPage/>,
         },
       ],
     },
