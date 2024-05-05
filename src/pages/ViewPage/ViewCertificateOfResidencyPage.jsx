@@ -99,6 +99,7 @@ const ViewCertificateOfResidencyPage = () => {
   const [clearanceData, setClearanceData] = useState(null);
   const token = Cookies.get("token");
   const barangay = Cookies.get("barangay");
+  const role = Cookies.get("role");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -139,9 +140,38 @@ const ViewCertificateOfResidencyPage = () => {
               <Card.Header>Certificate of Residency Details</Card.Header>
               <Card.Body>
                 <Card.Text>
-                  <PDFViewer width="100%" height="600">
-                    <PDFDocument formData={clearanceData} barangay={barangay} />
-                  </PDFViewer>
+                <Card.Text>
+                {
+                  role === "user" ?
+                  (
+                    <>
+                      <p>First Name: {formData.firstName}</p>
+                      <p>Middle Name: {formData.middleName}</p>
+                      <p>Last Name: {formData.lastName}</p>
+                      <p>Contact No: {formData.contactNo}</p>
+                      <p>Date: {new Date(formData.date).toLocaleString()}</p>
+                      <p>Purpose: {formData.purpose}</p>
+                      <p>Status: {formData.status}</p>
+                      <p>Pick Up: {formData.pickUp}</p>
+                      <p>Color: {formData.color}</p>
+                      <p>{formData.pickUp === "delivery" && `Fee: ${formData.fee}`}</p>
+                      <p>Address: {`
+                      ${formData.address.houseNumber && `#${formData.address.houseNumber}, `} 
+                      ${formData.address.street && `${formData.address.street}, `}  
+                      ${formData.address.barangay && `Brgy.${formData.address.barangay}, `} 
+                      ${formData.address.municipality && `${formData.address.municipality}, `} 
+                      ${formData.address.province && `${formData.address.province}, `} 
+                      ${formData.address.country && `${formData.address.country} `} 
+                      `}</p>
+                    </>
+                  ) : (
+                    <PDFViewer width="100%" height="600">
+                      <PDFDocument formData={formData} barangay={barangay}/>
+                    </PDFViewer>
+                  )
+                }
+                  
+                </Card.Text>
                 </Card.Text>
               </Card.Body>
             </Card>
