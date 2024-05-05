@@ -20,9 +20,8 @@ const Header = () => {
   const [barangay, setBarangay] = useState(myBarangay || "default");
   const [showLoginModal, setShowLoginModal] = useState(false);
   const { userData, loading: userLoading } = useCurrentUserData();
-  const {filteredBarangayData, loading: barangayLoading } = useBarangayData();
+  const { filteredBarangayData, loading: barangayLoading } = useBarangayData();
 
-  
   const handleBarangay = (e) => {
     const selectedBarangay = e.target.value;
     if (location.pathname === "/" || location.pathname === "/about") {
@@ -30,7 +29,6 @@ const Header = () => {
         navigate("/");
       } else {
         navigate("/about");
-        
       }
     }
     setBarangay(selectedBarangay);
@@ -81,8 +79,16 @@ const Header = () => {
       <Row className="d-flex justify-content-between align-items-center gap-2">
         <Col className="d-flex align-items-center">
           <img src={Logo} alt="logo" width={100} />
-          {filteredBarangayData && filteredBarangayData.logo && (
-            <img src={filteredBarangayData[0].logo} alt="logo" width={60} className="m-2" />
+          {filteredBarangayData && filteredBarangayData[0].logo && (
+            <img
+              src={
+                filteredBarangayData[0].logo ||
+                "https://firebasestorage.googleapis.com/v0/b/bwims-d1cba.appspot.com/o/barangay%2Flogo%2Fbwims-logo2.png?alt=media&token=fa0d713b-49e8-4662-a31c-f71e8816b886"
+              }
+              alt="logo"
+              width={60}
+              className="m-2"
+            />
           )}
           <div className="ms-3">
             <h5 className="fw-normal text-secondary fs-3">
