@@ -19,8 +19,10 @@ import Loading from "../Loading";
 
 const BlotterForm = () => {
   const token = Cookies.get("token");
+  const userId = Cookies.get("userId");
   const [loading, setLoading] = useState(false);
   const [imageUpload, setImageUpload] = useState(null);
+  const barangayOptions = ["Salapingan", "Lomboy"];
   const [formData, setFormData] = useState({
     firstName: "",
     middleName: "",
@@ -31,23 +33,32 @@ const BlotterForm = () => {
       street: "",
       houseNumber: "",
       barangay: "",
-      municipality: "",
-      province: "",
-      country: "",
     },
     date: new Date().toISOString().split("T")[0],
     narrativeReports: "",
-    userId: "",
+    userId: userId,
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  
+    if (name.startsWith("address.")) {
+      const addressField = name.split(".")[1];
+      setFormData((prevData) => ({
+        ...prevData,
+        address: {
+          ...prevData.address,
+          [addressField]: value,
+        },
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
+  
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
@@ -78,7 +89,13 @@ const BlotterForm = () => {
           imageURLs.push(url);
         }
       }
+      const isValidContactNo = (contactNo) => /^09\d{9}$/.test(contactNo);
 
+      if (!isValidContactNo(formData.contactNo)) {
+        return alert(
+          "Invalid contact number. Please enter a valid 11-digit number starting with 09."
+        );
+      }
       await axios.post(
         `${import.meta.env.VITE_BWIMS_API_KEY}/api/forms/blotter`,
         {
@@ -107,7 +124,6 @@ const BlotterForm = () => {
     }
   };
 
-
   return (
     <div>
       <Container className="w-75">
@@ -116,11 +132,7 @@ const BlotterForm = () => {
           <hr />
           <Form.Group controlId="formFile" className="mb-3">
             <Form.Label>Upload Image</Form.Label>
-            <Form.Control
-              type="file"
-              onChange={handleImageChange}
-              multiple 
-            />
+            <Form.Control type="file" onChange={handleImageChange} multiple />
           </Form.Group>
           <Card.Body className="d-flex flex-column">
             <h4>Personal Information</h4>
@@ -187,7 +199,7 @@ const BlotterForm = () => {
                 <span style={{ color: "red", marginLeft: 5 }}>*</span>
               </Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 name="contactNo"
                 placeholder="Contact Number"
                 value={formData.contactNo}
@@ -224,21 +236,26 @@ const BlotterForm = () => {
                   <span style={{ color: "red", marginLeft: 5 }}>*</span>
                 </Form.Label>
                 <Form.Control
-                  type="text"
+                  as="select"
                   name="address.barangay"
-                  placeholder="Barangay"
                   value={formData.address.barangay}
                   onChange={handleChange}
                   required
-                />
+                >
+                  <option value="">Select Barangay</option>
+                  {barangayOptions.map((barangay, index) => (
+                    <option key={index} value={barangay}>
+                      {barangay}
+                    </option>
+                  ))}
+                </Form.Control>
               </Col>
             </Row>
             <hr />
 
             <Col>
               <Form.Label>
-                Date:{" "}
-                <span style={{ color: "red", marginLeft: 5 }}>*</span>
+                Date: <span style={{ color: "red", marginLeft: 5 }}>*</span>
               </Form.Label>
               <Form.Control
                 type="date"

@@ -28,31 +28,39 @@ const ResidentsDataPage = () => {
     {
       id: 1,
       title: "Brgy. Residents",
-      data: filteredUsers.length,
+      data: filteredUsers.filter((user) => user.isVerified).length,
       path: "/e-services/barangay-residents",
     },
     {
       id: 2,
       title: "Head of the Family",
-      data: filteredUsers.filter((user) => user.isHeadOfFamily).length,
+      data: filteredUsers.filter(
+        (user) => user.isHeadOfFamily && user.isVerified
+      ).length,
       path: "/e-services/head-family",
     },
     {
       id: 3,
       title: "Registered Voters",
-      data: filteredUsers.filter((user) => user.isRegisteredVoter).length,
+      data: filteredUsers.filter(
+        (user) => user.isRegisteredVoter && user.isVerified
+      ).length,
       path: "/e-services/registered-voters",
     },
     {
       id: 4,
       title: "Male",
-      data: filteredUsers.filter((user) => user.sex === "Male").length,
+      data: filteredUsers.filter(
+        (user) => user.sex === "Male" && user.isVerified
+      ).length,
       path: "/e-services/male-residents",
     },
     {
       id: 5,
       title: "Female",
-      data: filteredUsers.filter((user) => user.sex === "Female").length,
+      data: filteredUsers.filter(
+        (user) => user.sex === "Female" && user.isVerified
+      ).length,
       path: "/e-services/female-residents",
     },
     {
@@ -62,7 +70,7 @@ const ResidentsDataPage = () => {
         (user) =>
           user.salaryRange === "5,000 below" ||
           user.salaryRange === "5,000 - 10,000" ||
-          user.salaryRange === "10,000 and less"
+          (user.salaryRange === "10,000 and less" && user.isVerified)
       ).length,
       path: "/e-services/male-residents",
     },
@@ -70,15 +78,16 @@ const ResidentsDataPage = () => {
       id: 7,
       title: "Mid Class",
       data: filteredUsers.filter(
-        (user) => user.salaryRange === "10,000 - 30,000"
+        (user) => user.salaryRange === "10,000 - 30,000" && user.isVerified
       ).length,
       path: "/e-services/midclass-residents",
     },
     {
       id: 8,
       title: "Upper Class",
-      data: filteredUsers.filter((user) => user.salaryRange === "30,000 above")
-        .length,
+      data: filteredUsers.filter(
+        (user) => user.salaryRange === "30,000 above" && user.isVerified
+      ).length,
       path: "/e-services/upperclass-residents",
     },
     {
@@ -95,14 +104,15 @@ const ResidentsDataPage = () => {
         ) {
           age--;
         }
-        return age >= 60;
+        return age >= 60 && user.isVerified;
       }).length,
       path: "/e-services/senior-citizen-residents",
     },
     {
       id: 10,
       title: "4ps Beneficiary",
-      data: filteredUsers.filter((user) => user.is4ps).length,
+      data: filteredUsers.filter((user) => user.is4ps && user.isVerified)
+        .length,
       path: "/e-services/4ps-benificiary-residents",
     },
   ];

@@ -25,7 +25,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
 
   const handleLogin = async () => {
     if (barangay === "default" || barangay === "") {
-      toast.error(
+      alert(
         `You need to select your barangay before you log-in to make any transactions online`
       );
       return;
@@ -41,7 +41,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
       const { token, userId, isVerified } = response.data;
 
       if (!isVerified) {
-        toast.error(
+        alert(
           `You are not verified yet! Please wait for admin for confirmation!`
         );
         return;
@@ -55,7 +55,6 @@ const LoginModal = ({ show, handleClose, barangay }) => {
         return;
       }
 
-      
       if (barangay !== userBarangay) {
         toast.error(
           `You are not registered in this barangay! Please register first in ${barangay}`
@@ -69,7 +68,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
       toast.success("Login successful");
       handleClose();
     } catch (error) {
-      toast.error("Login failed!");
+      alert("Login failed!");
     } finally {
       setLoading(false);
     }
@@ -88,7 +87,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
         subject: "Forgot Password",
         message: `Click this link to reset your password https://bwims.vercel.app//reset/${response.data.userId}`,
       });
-      
+
       toast.success("Check your email for reset password link!");
       //navigate(`/reset/${response.data.userId}`)
     } catch (error) {
@@ -122,25 +121,26 @@ const LoginModal = ({ show, handleClose, barangay }) => {
           </Form.Group>
 
           <Form.Group className="mt-3" controlId="formBasicPassword">
-            <div className="w-100 d-flex justify-content-between align-items-center">
-              <Form.Label>Password:</Form.Label>
+            <Form.Label>Password:</Form.Label>
+
+            <div className="w-100 form-control d-flex justify-content-between align-items-center">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Enter password"
+                className="w-100 fs-5"
+                value={formData.password}
+                style={{border: 0}}
+                onChange={handleInputChange}
+              />{" "}
               <Button
                 variant="link"
                 onClick={toggleShowPassword}
-                className="d-flex justify-content-between align-items-center text-decoration-none text-white"
+                className="d-flex justify-content-between align-items-center text-decoration-none"
               >
-                {showPassword ? "Hide" : "Show"} Password
+                {showPassword ? "Hide" : "Show"}
               </Button>
             </div>
-
-            <Form.Control
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Enter password"
-              value={formData.password}
-              size="lg"
-              onChange={handleInputChange}
-            />
           </Form.Group>
           <div className="d-flex justify-content-end">
             <p className="fs-5 text-primary fw-semibold" onClick={handleForgot}>

@@ -4,7 +4,7 @@ import CertificateOfIndigency from "../../assets/card/certificate-of-indigency.j
 import CertificateOfResidency from "../../assets/card/certificate-of-recidency.png";
 import Blotter from "../../assets/card/blotter.jpg";
 import CardsContainerLayout from "../../layouts/CardsContainerLayout";
-
+import Cookies from "js-cookie";
 const requestData = [
   {
     id: 1,
@@ -39,9 +39,15 @@ const requestData = [
 ];
 
 const MyRequestPage = () => {
+  const role = Cookies.get("role");
+
+  const filteredRequestData = role !== "chairman" && role !== "secretary"
+    ? requestData.filter(item => item.title !== "Blotter")
+    : requestData;
+
   return (
     <div className="d-flex justify-content-center">
-      <CardsContainerLayout data={requestData} />
+      <CardsContainerLayout data={filteredRequestData} />
     </div>
   );
 };

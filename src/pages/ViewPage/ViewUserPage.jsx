@@ -441,6 +441,7 @@ const ViewUserPage = () => {
                   name="contactNo"
                   value={user.contactNo}
                   onChange={handleInputChange}
+                  maxLength={11}
                   required
                 />
               </Col>

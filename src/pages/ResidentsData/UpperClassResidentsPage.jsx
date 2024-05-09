@@ -52,7 +52,7 @@ const UpperClassResidentsPage = () => {
       barangay === "default" || entry.address.barangay === barangay;
     const isUpperClass = entry.salaryRange === "30,000 above";
 
-    return includesSearchTerm && isBarangayMatch && isUpperClass;
+    return includesSearchTerm && isBarangayMatch && isUpperClass && entry.isVerified;
   });
 
   const indexOfLastItem = currentPage * itemsPerPage;

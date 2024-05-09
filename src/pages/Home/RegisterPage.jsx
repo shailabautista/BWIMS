@@ -212,7 +212,6 @@ const RegisterPage = () => {
               name="extensionName"
               value={user.extensionName}
               onChange={handleInputChange}
-              required
             />
           </Col>
         </Row>
@@ -438,6 +437,7 @@ const RegisterPage = () => {
               name="contactNo"
               value={user.contactNo}
               onChange={handleInputChange}
+              maxLength={11}
               required
             />
           </Col>

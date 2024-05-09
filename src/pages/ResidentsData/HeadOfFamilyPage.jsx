@@ -54,7 +54,7 @@ const HeadOfFamilyPage = () => {
         barangay === "default" || entry.address.barangay === barangay;
       const isHeadOfFamily = entry.isHeadOfFamily === true;
 
-      return includesSearchTerm && isBarangayMatch && isHeadOfFamily;
+      return includesSearchTerm && isBarangayMatch && isHeadOfFamily && entry.isVerified;
     });
 
   const indexOfLastItem = currentPage * itemsPerPage;

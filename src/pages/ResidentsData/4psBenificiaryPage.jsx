@@ -54,7 +54,7 @@ const BenificiaryPage = () => {
         barangay === "default" || entry.address.barangay === barangay;
       const is4ps = entry.is4ps === true;
 
-      return includesSearchTerm && isBarangayMatch && is4ps;
+      return includesSearchTerm && isBarangayMatch && is4ps && entry.isVerified;
     });
 
   const indexOfLastItem = currentPage * itemsPerPage;

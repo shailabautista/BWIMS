@@ -63,7 +63,7 @@ const SeniorCitizenPage = () => {
     ) {
       age--;
     }
-    return includesSearchTerm && isBarangayMatch && age >= 60;
+    return includesSearchTerm && isBarangayMatch && age >= 60 && entry.isVerified;
   });
 
   const indexOfLastItem = currentPage * itemsPerPage;

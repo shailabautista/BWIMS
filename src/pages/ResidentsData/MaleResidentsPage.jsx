@@ -54,7 +54,7 @@ const MaleResidentsPage = () => {
         barangay === "default" || entry.address.barangay === barangay;
       const isMale = entry.sex === "Male";
 
-      return includesSearchTerm && isBarangayMatch && isMale;
+      return includesSearchTerm && isBarangayMatch && isMale && entry.isVerified;
     });
 
   const indexOfLastItem = currentPage * itemsPerPage;

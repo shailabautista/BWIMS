@@ -54,7 +54,7 @@ const MidClassResidentsPage = () => {
         barangay === "default" || entry.address.barangay === barangay;
       const isMidClass = entry.salaryRange === "10,000 - 30,000";
 
-      return includesSearchTerm && isBarangayMatch && isMidClass;
+      return includesSearchTerm && isBarangayMatch && isMidClass && entry.isVerified;
     });
 
   const indexOfLastItem = currentPage * itemsPerPage;

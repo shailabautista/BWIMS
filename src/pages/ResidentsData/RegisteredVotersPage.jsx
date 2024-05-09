@@ -54,7 +54,7 @@ const RegisteredVotersPage = () => {
         barangay === "default" || entry.address.barangay === barangay;
       const isRegisteredVoter = entry.isRegisteredVoter === true;
 
-      return includesSearchTerm && isBarangayMatch && isRegisteredVoter;
+      return includesSearchTerm && isBarangayMatch && isRegisteredVoter && entry.isVerified;
     });
 
   const indexOfLastItem = currentPage * itemsPerPage;

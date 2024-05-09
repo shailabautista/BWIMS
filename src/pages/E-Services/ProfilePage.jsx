@@ -543,6 +543,7 @@ const ProfilePage = () => {
                     name="contactNo"
                     value={user.contactNo}
                     onChange={handleInputChange}
+                    maxLength={11}
                     required
                   />
                 </Col>

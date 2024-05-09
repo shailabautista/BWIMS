@@ -52,7 +52,7 @@ const BarangayResidentsPage = () => {
       )
     )
     .filter(
-      (entry) => barangay === "default" || entry.address.barangay === barangay
+      (entry) => barangay === "default" || entry.address.barangay === barangay && entry.isVerified
     );
 
   const indexOfLastItem = currentPage * itemsPerPage;

@@ -54,7 +54,7 @@ const LowClassResidentsPage = () => {
         barangay === "default" || entry.address.barangay === barangay;
       const isLowClass = entry.salaryRange === "10,000 and less";
 
-      return includesSearchTerm && isBarangayMatch && isLowClass;
+      return includesSearchTerm && isBarangayMatch && isLowClass && entry.isVerified;
     });
 
   const indexOfLastItem = currentPage * itemsPerPage;

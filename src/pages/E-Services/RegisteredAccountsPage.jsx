@@ -132,7 +132,7 @@ const RegisteredAccountsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {currentItems.map((user) => (
+              {currentItems.reverse().map((user) => (
                 <tr key={user._id}>
                   <td>{`${user.lName}, ${user.fName} ${user.mName}`}</td>
                   <td>{user.email}</td>
