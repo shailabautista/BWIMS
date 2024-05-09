@@ -35,7 +35,7 @@ const RegisteredAccountsPage = () => {
           },
         }
       );
-      setUsers(response.data);
+      setUsers(response.data.reverse());
       setLoading(false);
     } catch (error) {
       alert("Error fetching users:", error);
@@ -132,7 +132,7 @@ const RegisteredAccountsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {currentItems.reverse().map((user) => (
+              {currentItems.map((user) => (
                 <tr key={user._id}>
                   <td>{`${user.lName}, ${user.fName} ${user.mName}`}</td>
                   <td>{user.email}</td>

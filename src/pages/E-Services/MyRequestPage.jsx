@@ -30,24 +30,16 @@ const requestData = [
     image: CertificateOfResidency,
     path: "/e-services/my-certificate-of-residency",
   },
-  {
-    id: 5,
-    title: "Blotter",
-    image: Blotter,
-    path: "/e-services/my-blotter",
-  },
 ];
 
 const MyRequestPage = () => {
   const role = Cookies.get("role");
 
-  const filteredRequestData = role !== "chairman" && role !== "secretary"
-    ? requestData.filter(item => item.title !== "Blotter")
-    : requestData;
+
 
   return (
     <div className="d-flex justify-content-center">
-      <CardsContainerLayout data={filteredRequestData} />
+      <CardsContainerLayout data={requestData} />
     </div>
   );
 };
