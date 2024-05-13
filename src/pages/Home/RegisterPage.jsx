@@ -3,6 +3,7 @@ import { Spinner, Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
+import sendEmail from "../../utils/sendEmail";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -35,7 +36,6 @@ const RegisterPage = () => {
     },
     contactNo: "",
     password: "",
-    confirmPassword: "",
   });
 
   const barangays = ["Salapingao", "Lomboy"];
@@ -59,6 +59,7 @@ const RegisterPage = () => {
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
+    alert(checked)
     setUser((prevUser) => ({
       ...prevUser,
       [name]: checked,
@@ -79,13 +80,24 @@ const RegisterPage = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
+    const generatePassword = (firstName, lastName, birthDate) => {
+      const firstInitials = firstName.slice(0, 2).toLowerCase();
+      const formattedBirthDate = new Date(birthDate).getDate().toString().padStart(2, '0');
+      return `${firstInitials}${lastName.toLowerCase()}${formattedBirthDate}`;
+    };
+  
+    const password = generatePassword(user.fName, user.lName, user.birthday);
+    setUser((prevUser) => ({
+      ...prevUser,
+      password: password,
+    }));
+
     const isValidName = (name) =>
       /^[a-zA-Z\s!@#$%^&*(),.?":{}|<>]+$/.test(name) &&
       !/\d/.test(name) &&
       !/[^a-zA-Z\s!@#$%^&*(),.?":{}|<>]/.test(name);
     const isValidContactNo = (contactNo) => /^09\d{9}$/.test(contactNo);
-    const isStrongPassword = (password) =>
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+
     const isOverMinAge = (birthday) => {
       const birthdayDate = new Date(birthday);
       const currentDate = new Date();
@@ -105,37 +117,31 @@ const RegisterPage = () => {
 
     if (!isValidName(user.fName)) {
       setLoading(false);
-      return toast.error(
+      return alert(
         "Invalid first name. Please use only letters and no numbers."
       );
     }
     if (!isValidName(user.mName)) {
       setLoading(false);
-      return toast.error(
+      return alert(
         "Invalid middle name. Please use only letters and no numbers."
       );
     }
     if (!isValidName(user.lName)) {
       setLoading(false);
-      return toast.error(
+      return alert(
         "Invalid last name. Please use only letters and no numbers."
       );
     }
     if (!isValidContactNo(user.contactNo)) {
       setLoading(false);
-      return toast.error(
+      return alert(
         "Invalid contact number. Please enter a valid 11-digit number starting with 09."
-      );
-    }
-    if (!isStrongPassword(user.password)) {
-      setLoading(false);
-      return toast.error(
-        "Weak password. Please use at least 8 characters with a combination of letters and numbers."
       );
     }
     if (!isOverMinAge(user.birthday)) {
       setLoading(false);
-      return toast.error(
+      return alert(
         `You must be at least ${MIN_AGE} years old to register.`
       );
     }
@@ -145,12 +151,29 @@ const RegisterPage = () => {
         `${import.meta.env.VITE_BWIMS_API_KEY}/api/users/`,
         user
       );
-      toast.success(
+
+      await sendEmail({
+        to_email: user.email,
+        subject: "Your E-Services Account Password",
+        message: 
+        `
+        Welcome to our E-Services website! We're thrilled to have you as an official member.
+
+        To log in, please use the following password: [2 letters of your first name][your surname][your birth day].
+
+        For example, if your name is John Doe, your password would be JoDoe12.
+
+        Account Password: ${user.password}
+
+        If you have any questions or need further assistance, feel free to contact us 09465517858.
+        `,
+      });
+      alert(
         "You have created a new account! Check your email for verification"
       );
       navigate("/");
     } catch (error) {
-      toast.error("Registration failed");
+      alert("Registration failed");
     } finally {
       setLoading(false);
     }
@@ -232,7 +255,8 @@ const RegisterPage = () => {
           </Col>
           <Col>
             <Form.Label>
-              <span style={{ color: "red", marginLeft: 5 }}>*</span> Status:
+              <span style={{ color: "red", marginLeft: 5 }}>*</span>Marital
+              Status:
             </Form.Label>
             <Form.Control
               type="text"
@@ -286,7 +310,8 @@ const RegisterPage = () => {
             />
           </Col>
         </Row>
-
+        <hr />
+        <h4>Economic Status</h4>
         <Row className="mb-3">
           <Col>
             <Form.Check
@@ -443,33 +468,6 @@ const RegisterPage = () => {
           </Col>
         </Row>
 
-        <Row className="mb-3">
-          <Col>
-            <Form.Label>
-              <span style={{ color: "red", marginLeft: 5 }}>*</span> Password:
-            </Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              value={user.password}
-              onChange={handleInputChange}
-              required
-            />
-          </Col>
-          <Col>
-            <Form.Label>
-              <span style={{ color: "red", marginLeft: 5 }}>*</span> Confirm
-              Password:
-            </Form.Label>
-            <Form.Control
-              type="password"
-              name="confirmPassword"
-              value={user.confirmPassword}
-              onChange={handleInputChange}
-              required
-            />
-          </Col>
-        </Row>
         <Button
           type="submit"
           variant="success"

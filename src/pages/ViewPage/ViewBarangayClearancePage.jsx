@@ -3,15 +3,38 @@ import { Spinner, Container, Card, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Cookies from "js-cookie";
-import { PDFViewer, Document, Page, Text } from "@react-pdf/renderer";
+import { PDFViewer, Image, Document, Page, Text, View } from "@react-pdf/renderer";
+import LomboyWatermark from "../../assets/watermark/lomboy.jpg";
+import SalapingaoWatermark from "../../assets/watermark/salapingao.jpg";
 
 const PDFDocument = ({ formData, barangay }) => (
   <Document>
     <Page
       style={{
         fontSize: 12,
+        position: 'relative',
+        marginHorizontal: 12,
+
       }}
     >
+      <View
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          zIndex: -1,
+          opacity: 0.3, 
+        }}
+      >
+        <Image
+          src={barangay === "Lomboy" ? LomboyWatermark : barangay === "Salapingao" ? SalapingaoWatermark : "" }
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+        />
+      </View>
+  
       <Text
         style={{
           textAlign: "center",
@@ -142,7 +165,7 @@ const ViewBarangayClearancePage = () => {
           </Spinner>
         </div>
       ) : (
-        <Container className="w-75">
+        <Container>
           {formData && (
             <Card>
               <Card.Header>Barangay Clearance Details</Card.Header>
@@ -172,7 +195,7 @@ const ViewBarangayClearancePage = () => {
                       `}</p>
                     </>
                   ) : (
-                    <PDFViewer width="100%" height="600">
+                    <PDFViewer width="100%" height="800">
                       <PDFDocument formData={formData} barangay={barangay}/>
                     </PDFViewer>
                   )

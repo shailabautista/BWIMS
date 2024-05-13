@@ -11,6 +11,7 @@ import {
   Image,
   Button,
 } from "react-bootstrap";
+
 import axios from "axios";
 import Cookies from "js-cookie";
 import Loading from "../../components/Loading";
@@ -318,7 +319,7 @@ const ViewUserPage = () => {
                   <Col>
                     <Form.Label>
                       <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
-                      Status:
+                      Marital Status:
                     </Form.Label>
                     <Form.Control
                       type="text"
@@ -375,7 +376,8 @@ const ViewUserPage = () => {
                     />
                   </Col>
                 </Row>
-
+                <hr />
+                <h4>Economic Status</h4>
                 <Row className="mb-3">
                   <Col>
                     <Form.Check

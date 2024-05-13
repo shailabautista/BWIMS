@@ -61,7 +61,7 @@ const RegisteredAccountsPage = () => {
           },
         }
       );
-      alert("User verify succesfully!");
+      alert("User verification succesfully!");
       fetchUsers();
     } catch (error) {
       alert("Error deleting user:", error);

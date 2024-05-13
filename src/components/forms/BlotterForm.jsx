@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Spinner,
   Card,
@@ -14,8 +14,7 @@ import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 import axios from "axios";
 import Cookies from "js-cookie";
-import useCurrentUserData from "../../hooks/useCurrentUserData";
-import Loading from "../Loading";
+
 
 const BlotterForm = () => {
   const token = Cookies.get("token");

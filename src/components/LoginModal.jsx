@@ -7,7 +7,6 @@ import axios from "axios";
 import sendEmail from "../utils/sendEmail";
 
 const LoginModal = ({ show, handleClose, barangay }) => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -42,7 +41,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
 
       if (!isVerified) {
         alert(
-          `You are not verified yet! Please wait for admin for confirmation!`
+          `You are not verified yet! Please wait for account verification!`
         );
         return;
       }
@@ -50,7 +49,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
         Cookies.set("role", role);
         Cookies.set("token", token);
         Cookies.set("userId", userId);
-        toast.success("Admin login successful");
+        alert("You have successfully logged in!");
         handleClose();
         return;
       }
@@ -65,7 +64,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
       Cookies.set("role", role);
       Cookies.set("token", token);
       Cookies.set("userId", userId);
-      toast.success("Login successful");
+      alert("You have successfully logged in!");
       handleClose();
     } catch (error) {
       alert("Login failed!");

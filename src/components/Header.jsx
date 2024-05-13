@@ -79,23 +79,25 @@ const Header = () => {
       <Row className="d-flex justify-content-between align-items-center gap-2">
         <Col className="d-flex align-items-center">
           <img src={Logo} alt="logo" width={100} />
-          {filteredBarangayData && filteredBarangayData.length > 0 && filteredBarangayData[0].logo && myBarangay && (
-            <img
-              src={
-                filteredBarangayData[0].logo ||
-                "https://firebasestorage.googleapis.com/v0/b/bwims-d1cba.appspot.com/o/barangay%2Flogo%2Fbwims-logo2.png?alt=media&token=fa0d713b-49e8-4662-a31c-f71e8816b886"
-              }
-              alt="logo"
-              width={60}
-              className="m-2"
-            />
-          )}
-          <div className="ms-3">
+          <div className="m-3">
             <h5 className="fw-normal text-secondary fs-3">
               Republic of the Philippines
             </h5>
             <h4 className="fw-bold fs-2">DAGUPAN CITY</h4>
           </div>
+          {filteredBarangayData &&
+            filteredBarangayData.length > 0 &&
+            filteredBarangayData[0].logo &&
+            myBarangay && (
+              <img
+                src={
+                  filteredBarangayData[0].logo ||
+                  "https://firebasestorage.googleapis.com/v0/b/bwims-d1cba.appspot.com/o/barangay%2Flogo%2Fbwims-logo2.png?alt=media&token=fa0d713b-49e8-4662-a31c-f71e8816b886"
+                }
+                alt="logo"
+                width={100}
+              />
+            )}
         </Col>
         <Col
           xs={12}

@@ -5,13 +5,10 @@ import Cookies from "js-cookie";
 import Loading from "../../components/Loading";
 import useUsersData from "../../hooks/useUsersData";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
+  PieChart,
+  Pie,
+  Cell,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
@@ -92,7 +89,7 @@ const ResidentsDataPage = () => {
     },
     {
       id: 9,
-      title: "Senior",
+      title: "Senior Citizen",
       data: filteredUsers.filter((user) => {
         const birthDate = new Date(user.birthday);
         const today = new Date();
@@ -121,8 +118,10 @@ const ResidentsDataPage = () => {
 
   const chartData = contentData.map((item) => ({
     name: item.title,
-    total: item.data,
+    value: item.data,
   }));
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AF19FF', '#FF1493', '#FF6347', '#36a2eb', '#008080', '#808000'];
 
   return (
     <div className="d-flex justify-content-center">
@@ -133,14 +132,23 @@ const ResidentsDataPage = () => {
         </h1>
         <div>
           <ResponsiveContainer width="100%" height={400}>
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
+            <PieChart>
+              <Pie
+                data={chartData}
+                cx="50%"
+                cy="50%"
+                labelLine={false}
+                label={(entry) => `${entry.name}: ${entry.value}`}
+                outerRadius={150}
+                fill="#8884d8"
+                dataKey="value"
+              >
+                {chartData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+              </Pie>
               <Tooltip />
-              <Legend />
-              <Bar dataKey="total" fill="#198754" />
-            </BarChart>
+            </PieChart>
           </ResponsiveContainer>
         </div>
         <div className="d-flex flex-wrap justify-content-center align-items-center gap-4">

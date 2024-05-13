@@ -419,7 +419,7 @@ const ProfilePage = () => {
                     <Col>
                       <Form.Label>
                         <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
-                        Status:
+                        Marital Status:
                       </Form.Label>
                       <Form.Control
                         type="text"
@@ -476,7 +476,8 @@ const ProfilePage = () => {
                       />
                     </Col>
                   </Row>
-
+                  <hr />
+                  <h4>Economic Status</h4>
                   <Row className="mb-3">
                     <Col>
                       <Form.Check
