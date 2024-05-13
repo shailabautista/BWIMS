@@ -78,7 +78,7 @@ const Header = () => {
     <div className="container p-4">
       <Row className="d-flex justify-content-between align-items-center gap-2">
         <Col className="d-flex align-items-center">
-          <img src={Logo} alt="logo" width={100} />
+          <img src={Logo} alt="logo" width={80} />
           <div className="m-3">
             <h5 className="fw-normal text-secondary fs-3">
               Republic of the Philippines
@@ -95,7 +95,7 @@ const Header = () => {
                   "https://firebasestorage.googleapis.com/v0/b/bwims-d1cba.appspot.com/o/barangay%2Flogo%2Fbwims-logo2.png?alt=media&token=fa0d713b-49e8-4662-a31c-f71e8816b886"
                 }
                 alt="logo"
-                width={100}
+                width={80}
               />
             )}
         </Col>

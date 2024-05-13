@@ -41,10 +41,11 @@ const LoginModal = ({ show, handleClose, barangay }) => {
 
       if (!isVerified) {
         alert(
-          `You are not verified yet! Please wait for account verification!`
+          `Please wait for account verification.`
         );
         return;
       }
+      
       if (role === "admin") {
         Cookies.set("role", role);
         Cookies.set("token", token);

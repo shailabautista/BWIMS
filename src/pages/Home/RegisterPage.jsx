@@ -59,7 +59,6 @@ const RegisterPage = () => {
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
-    alert(checked)
     setUser((prevUser) => ({
       ...prevUser,
       [name]: checked,
@@ -467,7 +466,7 @@ const RegisterPage = () => {
             />
           </Col>
         </Row>
-
+        <h5>Your password will be sent to your email.</h5>
         <Button
           type="submit"
           variant="success"

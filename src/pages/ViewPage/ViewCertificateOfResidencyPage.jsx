@@ -84,7 +84,7 @@ const PDFDocument = ({ formData, barangay }) => (
         style={{
           textAlign: "center",
           fontSize: 25,
-          marginBottom: 20,
+          marginBottom: 50,
         }}
       >
         CERTIFICATE OF RESIDENCY
