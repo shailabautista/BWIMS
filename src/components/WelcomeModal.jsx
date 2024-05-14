@@ -36,16 +36,17 @@ const WelcomeModal = ({ show, handleClose, userId }) => {
       </Modal.Header>
       <Modal.Body>
         <div className="text-center mb-4">
-        <img src={WelcomeImage} alt="Welcome" className="img-fluid" style={{ maxWidth: '50%' }} />
+          <img
+            src={WelcomeImage}
+            alt="Welcome"
+            className="img-fluid"
+            style={{ maxWidth: "50%" }}
+          />
         </div>
         <p>
-          We&apos;re excited to have you onboard. BWIMS helps you manage your
-          inquiries in the barangay efficiently and effectively. Let&apos;s get
-          started!
-        </p>
-        <p>
-          If you need any help, our support team is here to assist you. Enjoy
-          your experience with BWIMS!
+          Congratulations! We are happy that you have been successfully verified
+          as a member of our barangay&apos;s e-services website. We hope to
+          continue making progress with you. Maraming salamat po.
         </p>
       </Modal.Body>
       <Modal.Footer>
