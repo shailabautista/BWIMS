@@ -114,6 +114,11 @@ const RegisterPage = () => {
     if (loading) return;
     setLoading(true);
 
+    if (!password) {
+      alert("Failed to generate a valid password. Please check your inputs.");
+      return;
+    }
+
     if (!isValidName(user.fName)) {
       setLoading(false);
       return alert(
@@ -162,11 +167,12 @@ const RegisterPage = () => {
 
         For example, if your name is John Doe, your password would be JoDoe12.
 
-        Account Password: ${user.password}
+        Account Password: ${password}
 
         If you have any questions or need further assistance, feel free to contact us 09465517858.
         `,
       });
+      
       alert(
         "You have created a new account! Check your email for verification"
       );
