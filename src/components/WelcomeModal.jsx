@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState  } from "react";
 import { Modal, Button, Spinner } from "react-bootstrap";
 import Cookies from "js-cookie";
 import axios from "axios";
@@ -8,7 +8,7 @@ const WelcomeModal = ({ show, handleClose, userId }) => {
   const token = Cookies.get("token");
   const [loading, setLoading] = useState(false);
 
-  const handleUpdate = async () => {
+  const updateRegistrationStatus = async () => {
     try {
       setLoading(true);
       await axios.put(
@@ -20,8 +20,6 @@ const WelcomeModal = ({ show, handleClose, userId }) => {
           },
         }
       );
-
-      handleClose();
     } catch (error) {
       alert("Update failed!");
     } finally {
@@ -29,9 +27,15 @@ const WelcomeModal = ({ show, handleClose, userId }) => {
     }
   };
 
+  const handleUpdate = async () => {
+    await updateRegistrationStatus();
+    handleClose();
+  };
+
+
   return (
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title>Welcome to BWIMS</Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -50,9 +54,6 @@ const WelcomeModal = ({ show, handleClose, userId }) => {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
         <Button variant="primary" onClick={handleUpdate} disabled={loading}>
           {loading ? (
             <Spinner

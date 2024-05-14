@@ -80,17 +80,20 @@ const RegisterPage = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    const generatePassword = (firstName, lastName, birthDate) => {
-      const firstInitials = firstName.slice(0, 2).toLowerCase();
-      const formattedBirthDate = new Date(birthDate).getDate().toString().padStart(2, '0');
-      return `${firstInitials}${lastName.toLowerCase()}${formattedBirthDate}`;
-    };
-  
-    const password = generatePassword(user.fName, user.lName, user.birthday);
-    setUser((prevUser) => ({
-      ...prevUser,
+    const firstInitials = user.fName.slice(0, 2).toLowerCase();
+    const formattedBirthDate = new Date(user.birthday)
+      .getDate()
+      .toString()
+      .padStart(2, "0");
+
+    const password = `${firstInitials}${user.lName.toLowerCase()}${formattedBirthDate}`;
+
+    const newUser = {
+      ...user,
       password: password,
-    }));
+    };
+
+    setUser(newUser);
 
     const isValidName = (name) =>
       /^[a-zA-Z\s!@#$%^&*(),.?":{}|<>]+$/.test(name) &&
@@ -115,53 +118,51 @@ const RegisterPage = () => {
     if (loading) return;
     setLoading(true);
 
-    if (!password) {
-      alert("Failed to generate a valid password. Please check your inputs.");
-      return;
-    }
-
-    if (!isValidName(user.fName)) {
-      setLoading(false);
-      return alert(
-        "Invalid first name. Please use only letters and no numbers."
-      );
-    }
-    if (!isValidName(user.mName)) {
-      setLoading(false);
-      return alert(
-        "Invalid middle name. Please use only letters and no numbers."
-      );
-    }
-    if (!isValidName(user.lName)) {
-      setLoading(false);
-      return alert(
-        "Invalid last name. Please use only letters and no numbers."
-      );
-    }
-    if (!isValidContactNo(user.contactNo)) {
-      setLoading(false);
-      return alert(
-        "Invalid contact number. Please enter a valid 11-digit number starting with 09."
-      );
-    }
-    if (!isOverMinAge(user.birthday)) {
-      setLoading(false);
-      return alert(
-        `You must be at least ${MIN_AGE} years old to register.`
-      );
-    }
-
     try {
+      if (!newUser.password) {
+        setLoading(false);
+        
+        return alert("Failed to generate a valid password.");
+      }
+
+      if (!isValidName(newUser.fName)) {
+        setLoading(false);
+        return alert(
+          "Invalid first name. Please use only letters and no numbers."
+        );
+      }
+      if (!isValidName(newUser.mName)) {
+        setLoading(false);
+        return alert(
+          "Invalid middle name. Please use only letters and no numbers."
+        );
+      }
+      if (!isValidName(newUser.lName)) {
+        setLoading(false);
+        return alert(
+          "Invalid last name. Please use only letters and no numbers."
+        );
+      }
+      if (!isValidContactNo(newUser.contactNo)) {
+        setLoading(false);
+        return alert(
+          "Invalid contact number. Please enter a valid 11-digit number starting with 09."
+        );
+      }
+      if (!isOverMinAge(newUser.birthday)) {
+        setLoading(false);
+        return alert(`You must be at least ${MIN_AGE} years old to register.`);
+      }
+
       await axios.post(
         `${import.meta.env.VITE_BWIMS_API_KEY}/api/users/`,
-        user
+        newUser
       );
 
       await sendEmail({
-        to_email: user.email,
+        to_email: "diestapatrick1@gmail.com",
         subject: "Your E-Services Account Password",
-        message: 
-        `
+        message: `
         Welcome to our E-Services website! We're thrilled to have you as an official member.
 
         To log in, please use the following password: [2 letters of your first name][your surname][your birth day].
@@ -173,7 +174,7 @@ const RegisterPage = () => {
         If you have any questions or need further assistance, feel free to contact us 09465517858.
         `,
       });
-      
+
       alert(
         "You have created a new account! Check your email for verification"
       );

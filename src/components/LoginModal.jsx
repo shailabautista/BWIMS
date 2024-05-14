@@ -77,7 +77,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
       Cookies.set("userId", userId);
 
       alert("You have successfully logged in!");
-      if (!isFirstRegister) {
+      if (isFirstRegister) {
         setUserId(userId);
         setShowWelcomeModal(true);
         handleClose();
