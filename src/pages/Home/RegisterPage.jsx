@@ -26,6 +26,7 @@ const RegisterPage = () => {
     isRegisteredVoter: false,
     isEmployed: false,
     is4ps: false,
+    isFirstRegister: true,
     address: {
       street: "",
       houseNumber: 0,

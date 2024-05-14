@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Cookies from "js-cookie";
 import axios from "axios";
 import sendEmail from "../utils/sendEmail";
+import WelcomeModal from "./WelcomeModal";
 
 const LoginModal = ({ show, handleClose, barangay }) => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const LoginModal = ({ show, handleClose, barangay }) => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
@@ -37,7 +40,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
       );
 
       const { role, barangay: userBarangay } = response.data;
-      const { token, userId, isVerified } = response.data;
+      const { token, userId, isVerified, isFirstRegister } = response.data;
 
       if (!isVerified) {
         alert(
@@ -45,12 +48,19 @@ const LoginModal = ({ show, handleClose, barangay }) => {
         );
         return;
       }
-      
+    
+
       if (role === "admin") {
         Cookies.set("role", role);
         Cookies.set("token", token);
         Cookies.set("userId", userId);
         alert("You have successfully logged in!");
+        if (isFirstRegister) {
+          setUserId(userId);
+          setShowWelcomeModal(true);
+          handleClose();
+          return;
+        }
         handleClose();
         return;
       }
@@ -65,7 +75,14 @@ const LoginModal = ({ show, handleClose, barangay }) => {
       Cookies.set("role", role);
       Cookies.set("token", token);
       Cookies.set("userId", userId);
+
       alert("You have successfully logged in!");
+      if (!isFirstRegister) {
+        setUserId(userId);
+        setShowWelcomeModal(true);
+        handleClose();
+        return;
+      }
       handleClose();
     } catch (error) {
       alert("Login failed!");
@@ -102,6 +119,7 @@ const LoginModal = ({ show, handleClose, barangay }) => {
   };
 
   return (
+    <>
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>Login to continue</Modal.Title>
@@ -180,6 +198,16 @@ const LoginModal = ({ show, handleClose, barangay }) => {
         </Form>
       </Modal.Body>
     </Modal>
+     {showWelcomeModal && (
+      <WelcomeModal
+        show={showWelcomeModal}
+        handleClose={() => {
+          setShowWelcomeModal(false);
+        }}
+        userId={userId}
+      />
+    )}
+    </>
   );
 };
 
