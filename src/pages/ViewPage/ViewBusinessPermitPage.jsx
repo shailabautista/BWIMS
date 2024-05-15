@@ -39,7 +39,7 @@ const PDFDocument = ({ formData, barangay }) => (
       <Text
         style={{
           fontSize: 12,
-          marginTop: 20,
+          marginTop: 18,
           marginBottom: 2,
         }}
       >
