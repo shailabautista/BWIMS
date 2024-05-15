@@ -39,6 +39,7 @@ const PDFDocument = ({ formData, barangay }) => (
         style={{
           textAlign: "center",
           fontSize: 12,
+          marginTop: 20,
           marginBottom: 2,
         }}
       >
@@ -48,7 +49,6 @@ const PDFDocument = ({ formData, barangay }) => (
         style={{
           textAlign: "center",
           fontSize: 12,
-          marginTop: 20,
           marginBottom: 2,
         }}
       >
