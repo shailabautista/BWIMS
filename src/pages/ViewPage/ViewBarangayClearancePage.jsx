@@ -90,14 +90,14 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>{" "}
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '2cm',
-          paddingRight: '1.5cm',
+          paddingLeft: '1.7cm',
+          paddingRight: '2cm',
         }}>
         TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '2cm',
-          paddingRight: '1.5cm'',
+          paddingLeft: '1.7cm',
+          paddingRight: '2cm'',
         }}>
         {" "}{" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} male/female, married/single
@@ -107,24 +107,24 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '2cm',
-          paddingRight: '1.5cm',
+          paddingLeft: '1.7cm',
+          paddingRight: '2cm',
         }}>
         It is futher certified that above-named person has never 
         been accused in any crime.
       </Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '2cm',
-          paddingRight: '1.5cm',
+          paddingLeft: '1.7cm',
+          paddingRight: '2cm',
         }}>
         This certification is issued upon request for whatever legal purpose
         and intends it may serve.
       </Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '2cm',
-          paddingRight: '1.5cm',
+          paddingLeft: '1.7cm',
+          paddingRight: '2cm',
         }}>
         Issued {new Date(formData.date).toLocaleString()} at {barangay} Barangay Hall, Dagupan City.
       </Text>
