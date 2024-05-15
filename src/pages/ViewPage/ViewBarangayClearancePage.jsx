@@ -30,7 +30,7 @@ const PDFDocument = ({ formData, barangay }) => (
           src={barangay === "Lomboy" ? LomboyWatermark : barangay === "Salapingao" ? SalapingaoWatermark : "" }
           style={{
             width: '100%',
-            height: '100%',
+            height: '80%',
           }}
         />
       </View>
