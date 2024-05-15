@@ -14,7 +14,9 @@ const PDFDocument = ({ formData, barangay }) => (
         fontSize: 12,
         position: 'relative',
         marginHorizontal: 12,
-
+        padding: '1cm',
+        paddingLeft: '1cm',
+        paddingRight: '1cm',
       }}
     >
       <View
@@ -93,8 +95,7 @@ const PDFDocument = ({ formData, barangay }) => (
           marginBottom: 20,
         }}>TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
-          marginBottom: 50,
-          marginTop: 50,
+          marginBottom: 20,
         }}>
         {" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} male/female, married/single
