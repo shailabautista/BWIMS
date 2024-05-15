@@ -93,7 +93,8 @@ const PDFDocument = ({ formData, barangay }) => (
           marginBottom: 20,
         }}>TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
-          marginBottom: 38,
+          marginBottom: 20,
+          marginLeft: 20,
         }}>
         {" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} male/female, married/single
@@ -102,7 +103,7 @@ const PDFDocument = ({ formData, barangay }) => (
         abiding citizen of this Barangay.
       </Text>
       <Text style={{
-          marginBottom: 38,
+          marginBottom: 20,
         }}>
         It is futher certified that above-named person has never 
         been accused in any crime.
