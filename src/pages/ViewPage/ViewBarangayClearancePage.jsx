@@ -90,14 +90,14 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>{" "}
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '3cm',
-          paddingRight: '3cm',
+          paddingLeft: '2.5cm',
+          paddingRight: '2.5cm',
         }}>
         TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '3cm',
-          paddingRight: '3cm',
+          paddingLeft: '2.5cm',
+          paddingRight: '2.5cm',
         }}>
         {" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} male/female, married/single
@@ -107,8 +107,8 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '3cm',
-          paddingRight: '3cm',
+          paddingLeft: '2.5cm',
+          paddingRight: '2.5cm',
         }}>
         It is futher certified that above-named person has never 
         been accused in any crime.
