@@ -90,13 +90,13 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>{" "}
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '2cm',
+          paddingLeft: '3cm',
           paddingRight: '3cm',
         }}>
         TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '2.5cm',
+          paddingLeft: '3cm',
           paddingRight: '3cm',
         }}>
         {" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
@@ -107,7 +107,7 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '1cm',
+          paddingLeft: '3cm',
           paddingRight: '3cm',
         }}>
         It is futher certified that above-named person has never 
