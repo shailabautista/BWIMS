@@ -84,7 +84,7 @@ const PDFDocument = ({ formData, barangay }) => (
         style={{
           textAlign: "center",
           fontSize: 25,
-          marginBottom: 60,
+          marginBottom: 70,
         }}
       >
         BARANGAY CLEARANCE
