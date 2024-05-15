@@ -93,12 +93,12 @@ const PDFDocument = ({ formData, barangay }) => (
       <Text style={{
           marginBottom: 20,
           paddingLeft: '2cm',
-          paddingRight: '2cm',
+          paddingRight: '1.7cm',
         }}>TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
           marginBottom: 20,
           paddingLeft: '2cm',
-          paddingRight: '2cm',
+          paddingRight: '1.7cm',
         }}>
         {" "}{" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} male/female, married/single
@@ -108,7 +108,7 @@ const PDFDocument = ({ formData, barangay }) => (
       <Text style={{
           marginBottom: 20,
           paddingLeft: '2cm',
-          paddingRight: '2cm',
+          paddingRight: '1.7cm',
         }}>
         {" "}{" "}{" "}{" "}{" "}{" "}Certifying further, that above-named person, is
         a person of good moral character and has no derogatory and/or criminal records
@@ -117,7 +117,7 @@ const PDFDocument = ({ formData, barangay }) => (
       <Text style={{
           marginBottom: 20,
           paddingLeft: '2cm',
-          paddingRight: '2cm',
+          paddingRight: '1.7cm',
         }}>
         Issued {new Date(formData.date).toLocaleString()} at {barangay} Barangay Hall, Dagupan City.
       </Text>
