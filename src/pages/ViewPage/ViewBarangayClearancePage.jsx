@@ -34,15 +34,13 @@ const PDFDocument = ({ formData, barangay }) => (
           }}
         />
       </View>
-  
       <Text
         style={{
           textAlign: "center",
           fontSize: 12,
-          marginBottom: 2,
+          marginBottom: 5,
         }}
-      >
-        
+      > 
         Republic of the Philippines
       </Text>
       <Text
