@@ -95,7 +95,7 @@ const PDFDocument = ({ formData, barangay }) => (
       <Text style={{
           marginBottom: 20,
         }}>
-        {" "}{" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
+        {" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} male/female, married/single
         of legal age, Filipino and a resident of Barangay {barangay},
         Dagupan City, is known me personally to be a good moral character and a law 
