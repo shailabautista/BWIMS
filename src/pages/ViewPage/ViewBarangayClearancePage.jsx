@@ -93,7 +93,6 @@ const PDFDocument = ({ formData, barangay }) => (
         }}>TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
           marginBottom: 20,
-          padding: '2cm',
           paddingLeft: '2cm',
           paddingRight: '2cm',
         }}>
@@ -105,7 +104,6 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>
       <Text style={{
           marginBottom: 20,
-          padding: '2cm',
           paddingLeft: '2cm',
           paddingRight: '2cm',
         }}>
@@ -114,7 +112,6 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>
       <Text style={{
           marginBottom: 20,
-          padding: '2cm',
           paddingLeft: '2cm',
           paddingRight: '2cm',
         }}>
