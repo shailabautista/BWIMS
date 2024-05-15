@@ -96,7 +96,7 @@ const PDFDocument = ({ formData, barangay }) => (
         TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '1cm',
+          paddingLeft: '2.5cm',
           paddingRight: '3cm',
         }}>
         {" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
