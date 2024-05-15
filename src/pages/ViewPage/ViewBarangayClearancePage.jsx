@@ -105,7 +105,7 @@ const PDFDocument = ({ formData, barangay }) => (
       <Text style={{
           marginBottom: 20,
           paddingLeft: '2cm',
-          paddingRight: '0.5cm',
+          paddingRight: '1cm',
         }}>
         It is futher certified that above-named person has never 
         been accused in any crime.
@@ -113,7 +113,7 @@ const PDFDocument = ({ formData, barangay }) => (
       <Text style={{
           marginBottom: 20,
           paddingLeft: '2cm',
-          paddingRight: '0.5cm',
+          paddingRight: '1cm',
         }}>
         This certification is issued upon request for whatever legal purpose
         and intends it may serve.
