@@ -160,7 +160,7 @@ const RegisterPage = () => {
       );
 
       await sendEmail({
-        to_email: "diestapatrick1@gmail.com",
+        to_email: newUser.email,
         subject: "Your E-Services Account Password",
         message: `
         Welcome to our E-Services website! We're thrilled to have you as an official member.
