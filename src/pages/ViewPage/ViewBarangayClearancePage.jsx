@@ -38,7 +38,8 @@ const PDFDocument = ({ formData, barangay }) => (
         style={{
           textAlign: "center",
           fontSize: 12,
-          marginBottom: 5,
+          marginBottom: 2,
+          marginTop: 5,
         }}
       > 
         Republic of the Philippines
