@@ -93,8 +93,7 @@ const PDFDocument = ({ formData, barangay }) => (
           marginBottom: 20,
         }}>TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
-          marginBottom: 20,
-          marginLeft: 20,
+          marginBottom: 50,
         }}>
         {" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} male/female, married/single
