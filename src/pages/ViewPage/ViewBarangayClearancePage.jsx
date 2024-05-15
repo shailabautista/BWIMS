@@ -92,7 +92,8 @@ const PDFDocument = ({ formData, barangay }) => (
           marginBottom: 20,
           paddingLeft: '3cm',
           paddingRight: '1cm',
-        }}>TO WHOM IT MAY CONCERN:</Text>
+        }}>
+        TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
           marginBottom: 20,
           paddingLeft: '3cm',
