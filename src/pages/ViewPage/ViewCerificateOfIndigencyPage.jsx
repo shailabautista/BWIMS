@@ -100,7 +100,7 @@ const PDFDocument = ({ formData, barangay }) => (
           paddingLeft: '2cm',
           paddingRight: '2cm',
         }}>
-        {" "}{" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
+        {" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} a permanent resident of Barangay {barangay},
         Dagupan City, and is personally to be a good moral character and a law 
         abiding citizen, and also considered as one of INDIGENT in this community.
