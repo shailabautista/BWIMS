@@ -115,7 +115,7 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '1cm',
+          paddingLeft: '3cm',
           paddingRight: '3cm',
         }}>
         This certification is issued upon request for whatever legal purpose
@@ -123,7 +123,7 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>
       <Text style={{
           marginBottom: 20,
-          paddingLeft: '1cm',
+          paddingLeft: '3cm',
           paddingRight: '3cm',
         }}>
         Issued {new Date(formData.date).toLocaleString()} at {barangay} Barangay Hall, Dagupan City.
