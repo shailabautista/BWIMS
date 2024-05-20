@@ -130,9 +130,9 @@ const PDFDocument = ({ formData, barangay }) => (
         {barangay === "Salapingao" ? "DELFIN C. DE GUZMAN" : barangay === "Lomboy" ? "ARSENIO V. SANTILLAN SR." : 'Kapitan C. Tutan'}
       </Text>
       <Text style={{
-          textAlign: "right",
-          paddingLeft: '2cm',
-          paddingRight: '1.7cm',
+          textAlign: "center",
+          paddingLeft: '15cm',
+          paddingRight: '0cm',
         }}>
         Barangay Captain
       </Text>
