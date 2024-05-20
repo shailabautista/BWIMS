@@ -317,16 +317,24 @@ const ViewUserPage = () => {
                   </Col>
                   <Col>
                     <Form.Label>
-                      <span style={{ color: "red", marginLeft: 5 }}>*</span>{" "}
+                      <span style={{ color: "red", marginLeft: 5 }}>*</span>
                       Marital Status:
                     </Form.Label>
                     <Form.Control
-                      type="text"
+                      as="select"
                       name="status"
                       value={user.status}
                       onChange={handleInputChange}
                       required
-                    />
+                    >
+                      <option value="">Select your marital status</option>
+                      <option value="Single">Single</option>
+                      <option value="Married">Married</option>
+                      <option value="Widowed">Widowed</option>
+                      <option value="Divorced">Divorced</option>
+                      <option value="Annulled">Annulled</option>
+                      <option value="Separated">Separated</option>
+                    </Form.Control>
                   </Col>
                   <Col>
                     <Form.Label>

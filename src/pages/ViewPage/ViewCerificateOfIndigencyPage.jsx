@@ -100,8 +100,9 @@ const PDFDocument = ({ formData, barangay }) => (
           paddingLeft: '2cm',
           paddingRight: '1.7cm',
         }}>
-        {" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
-        {formData.firstName} {formData.middleName} a permanent resident of Barangay {barangay},
+        {" "}{" "}{" "}{" "}{" "}This is to certify that{" "}
+        <Text style={{ fontSize: 12, }}>{formData.lastName}, {formData.firstName} {formData.extensionName ?  formData.extensionName  : null} {formData.middleName}</Text>
+        {" "}a permanent resident of Barangay {barangay},
         Dagupan City, and is personally to be a good moral character and a law 
         abiding citizen, and also considered as one of INDIGENT in this community.
        </Text>
@@ -114,11 +115,26 @@ const PDFDocument = ({ formData, barangay }) => (
         it may serve them best.
       </Text>
       <Text style={{
-          marginBottom: 20,
+          marginBottom: 100,
           paddingLeft: '2cm',
           paddingRight: '1.7cm',
         }}>
         Issued {new Date(formData.date).toLocaleString()} at {barangay} Barangay Hall, Dagupan City.
+      </Text>
+      <Text style={{
+          textAlign: "right",
+          marginBottom: 2,
+          paddingLeft: '2cm',
+          paddingRight: '1.7cm',
+        }}>
+        {barangay === "Salapingao" ? "Delfin C. De Guzman" : barangay === "Lomboy" ? "Arsenio V. Santillan Sr." : 'Kapitan C. Tutan'}
+      </Text>
+      <Text style={{
+          textAlign: "right",
+          paddingLeft: '2cm',
+          paddingRight: '1.7cm',
+        }}>
+        Barangay Captain
       </Text>
     </Page>
   </Document>

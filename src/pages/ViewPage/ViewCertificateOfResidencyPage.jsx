@@ -3,9 +3,10 @@ import { Spinner, Container, Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { PDFViewer, Image, Document, Page, Text, View } from "@react-pdf/renderer";
+import { PDFViewer, Image, Document, Page, Text, View, Font } from "@react-pdf/renderer";
 import LomboyWatermark from "../../assets/watermark/lomboy.jpg";
 import SalapingaoWatermark from "../../assets/watermark/salapingao.jpg";
+
 
 const PDFDocument = ({ formData, barangay }) => (
   <Document>
@@ -100,8 +101,9 @@ const PDFDocument = ({ formData, barangay }) => (
           paddingLeft: '2cm',
           paddingRight: '1.7cm',
         }}>
-        {" "}{" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
-        {formData.firstName} {formData.middleName} male/female, married/single
+        {" "}{" "}{" "}{" "}{" "}{" "}This is to certify that{" "}
+        <Text style={{ fontSize: 12, }}>{formData.lastName}, {formData.firstName} {formData.extensionName ?  formData.extensionName  : null} {formData.middleName}</Text>
+       {" "} male/female, married/single
         of legal age. Filipino Citizen is a bonafide of Barangay {barangay},
         Dagupan City,
       </Text>
@@ -115,11 +117,26 @@ const PDFDocument = ({ formData, barangay }) => (
         in the barangay.
       </Text>
       <Text style={{
-          marginBottom: 20,
+          marginBottom: 100,
           paddingLeft: '2cm',
           paddingRight: '1.7cm',
         }}>
         Issued {new Date(formData.date).toLocaleString()} at {barangay} Barangay Hall, Dagupan City.
+      </Text>
+      <Text style={{
+          textAlign: "right",
+          marginBottom: 2,
+          paddingLeft: '2cm',
+          paddingRight: '1.7cm',
+        }}>
+        {barangay === "Salapingao" ? "Delfin C. De Guzman" : barangay === "Lomboy" ? "Arsenio V. Santillan Sr." : 'Kapitan C. Tutan'}
+      </Text>
+      <Text style={{
+         textAlign: "right",
+          paddingLeft: '2cm',
+          paddingRight: '1.7cm',
+        }}>
+        Barangay Captain
       </Text>
     </Page>
   </Document>

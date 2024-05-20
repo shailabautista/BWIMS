@@ -88,9 +88,13 @@ const PDFDocument = ({ formData, barangay }) => (
       <Text style={{
           textAlign: "left",
           marginBottom: 20,
+          paddingLeft: '2cm',
+          paddingRight: '2cm',
         }}>TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
           marginBottom: 20,
+          paddingLeft: '2cm',
+          paddingRight: '2cm',
         }}>
         {" "}{" "}{" "}This Barangay {barangay}, Dagupan City, has no objection to the 
         renewal for CY2023 for the
@@ -99,31 +103,56 @@ const PDFDocument = ({ formData, barangay }) => (
         style={{
           fontSize: 25,
           marginBottom: 12,
+          paddingLeft: '2cm',
+          paddingRight: '2cm',
         }}
       >
         BUSINESS PERMIT
       </Text>
       <Text style={{
           marginBottom: 12,
+          paddingLeft: '2cm',
+          paddingRight: '2cm',
         }}>
           to
       </Text>
       <Text style={{
           marginBottom: 20,
+          paddingLeft: '2cm',
+          paddingRight: '2cm',
         }}>
-          {formData.lastName}, {formData.firstName} {formData.middleName}
+        <Text style={{ fontSize: 15, }}>{formData.lastName}, {formData.firstName} {formData.extensionName ?  formData.extensionName  : null} {formData.middleName}</Text>
       </Text>
       <Text style={{
           marginBottom: 20,
+          paddingLeft: '2cm',
+          paddingRight: '2cm',
         }}>
         {" "}{" "}{" "}The issuance of this Clearance is subject to the condition that the above  
         name has compiled with and shall continue to comply with all existing laws, rules, & regulations
         governing the holding of the same.
       </Text>
       <Text style={{
-          marginBottom: 20,
+          marginBottom: 100,
+          paddingLeft: '2cm',
+          paddingRight: '2cm',
         }}>
         Issued {new Date(formData.date).toLocaleString()} at {barangay} Barangay Hall, Dagupan City.
+      </Text>
+      <Text style={{
+          marginBottom: 2,
+          textAlign: "right",
+          paddingLeft: '2cm',
+          paddingRight: '2cm',
+        }}>
+        {barangay === "Salapingao" ? "Delfin C. De Guzman" : barangay === "Lomboy" ? "Arsenio V. Santillan Sr." : 'Kapitan C. Tutan'}
+      </Text>
+      <Text style={{
+          textAlign: "right",
+          paddingLeft: '2cm',
+          paddingRight: '2cm',
+        }}>
+        Barangay Captain
       </Text>
     </Page>
   </Document>
