@@ -39,6 +39,7 @@ const PDFDocument = ({ formData, barangay }) => (
         style={{
           textAlign: "center",
           fontSize: 12,
+          marginTop: 18,
           marginBottom: 2,
         }}
       >
@@ -91,23 +92,31 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>{" "}
       <Text style={{
           marginBottom: 20,
+          paddingLeft: '2cm',
+          paddingRight: '1.7cm'',
         }}>TO WHOM IT MAY CONCERN:</Text>
       <Text style={{
           marginBottom: 20,
+          paddingLeft: '2cm',
+          paddingRight: '1.7cm',
         }}>
-        {" "}{" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
+        {" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} a permanent resident of Barangay {barangay},
         Dagupan City, and is personally to be a good moral character and a law 
         abiding citizen, and also considered as one of INDIGENT in this community.
        </Text>
       <Text style={{
           marginBottom: 20,
+          paddingLeft: '2cm',
+          paddingRight: '1.7cm',
         }}>
         Issued this certification upon request for whatever legal purpose
         it may serve them best.
       </Text>
       <Text style={{
           marginBottom: 20,
+          paddingLeft: '2cm',
+          paddingRight: '1.7cm',
         }}>
         Issued {new Date(formData.date).toLocaleString()} at {barangay} Barangay Hall, Dagupan City.
       </Text>
