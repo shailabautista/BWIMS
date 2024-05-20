@@ -25,6 +25,7 @@ const BusinessPermitForm = () => {
     firstName: "",
     middleName: "",
     lastName: "",
+    extensionName: "",
     contactNo: "",
     address: {
       street: "",
@@ -49,6 +50,7 @@ const BusinessPermitForm = () => {
         firstName: userData.fName || "",
         middleName: userData.mName || "",
         lastName: userData.lName || "",
+        extensionName: userData.extensionName || "",
         contactNo: userData.contactNo || "",
         userId: userData._id || "",
         address: {
@@ -201,6 +203,19 @@ const BusinessPermitForm = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   required
+                />
+              </Col>
+              <Col>
+                <Form.Label>
+                  Extension Name:{" "}
+                  <span style={{ color: "red", marginLeft: 5 }}>*</span>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="extensionName"
+                  placeholder="Extension Name"
+                  value={formData.extensionName}
+                  onChange={handleChange}
                 />
               </Col>
             </Row>

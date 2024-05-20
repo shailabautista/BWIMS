@@ -134,7 +134,7 @@ const RegisteredAccountsPage = () => {
             <tbody>
               {currentItems.map((user) => (
                 <tr key={user._id}>
-                  <td>{`${user.lName}, ${user.fName} ${user.mName}`}</td>
+                  <td>{`${user.lName}, ${user.fName} ${user.extensionName ?  user.extensionName  : ""} ${user.mName}`}</td>
                   <td>{user.email}</td>
                   <td>{user.role}</td>
                   <td>{user.accountStatus}</td>

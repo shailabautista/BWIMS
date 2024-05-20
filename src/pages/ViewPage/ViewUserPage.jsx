@@ -297,7 +297,6 @@ const ViewUserPage = () => {
                       name="extensionName"
                       value={user.extensionName}
                       onChange={handleInputChange}
-                      required
                     />
                   </Col>
                 </Row>
