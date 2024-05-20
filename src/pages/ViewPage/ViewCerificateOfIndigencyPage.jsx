@@ -131,7 +131,7 @@ const PDFDocument = ({ formData, barangay }) => (
       </Text>
       <Text style={{
           textAlign: "center",
-          paddingLeft: '14cm',
+          paddingLeft: '12cm',
           paddingRight: '0cm',
         }}>
         Barangay Captain
