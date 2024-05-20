@@ -15,7 +15,7 @@ const PDFDocument = ({ formData, barangay }) => (
         position: 'relative',
         marginHorizontal: 12,
       }}
-    >
+    > 
       <View
         style={{
           position: 'absolute',
