@@ -97,7 +97,7 @@ const PDFDocument = ({ formData, barangay }) => (
       <Text style={{
           marginBottom: 20,
           paddingLeft: '2cm',
-          paddingRight: '2cm'',
+          paddingRight: '2cm',
         }}>
         {" "}{" "}{" "}{" "}{" "}{" "}This is to certify that {formData.lastName},
         {formData.firstName} {formData.middleName} male/female, married/single
