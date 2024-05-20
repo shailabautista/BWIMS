@@ -129,7 +129,7 @@ const PDFDocument = ({ formData, barangay }) => (
           paddingLeft: '2cm',
           paddingRight: '1.7cm',
         }}>
-        {barangay === "Salapingao" ? "Delfin C. De Guzman" : barangay === "Lomboy" ? "Arsenio V. Santillan Sr." : 'Kapitan C. Tutan'}
+        {barangay === "Salapingao" ? "DELFIN C. DE GUZMAN" : barangay === "Lomboy" ? "ARSENIO V. SANTILLAN SR." : 'Kapitan C. Tutan'}
       </Text>
       <Text style={{
          textAlign: "right",
