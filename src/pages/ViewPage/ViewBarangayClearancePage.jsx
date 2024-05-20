@@ -100,7 +100,9 @@ const PDFDocument = ({ formData, barangay }) => (
           paddingRight: '2cm',
         }}>
         {" "}{" "}{" "}{" "}{" "}{" "}{" "}This is to certify that{" "}
-        <Text style={{ fontSize: 12, }}>{formData.lastName}, {formData.firstName} {formData.extensionName ?  formData.extensionName  : null} {formData.middleName}</Text>
+        <Text style={{ fontSize: 12, }}><Text style={{ fontWeight: 'bold' }}>
+      {formData.lastName}, {formData.firstName} {formData.extensionName ? formData.extensionName : null} {formData.middleName}
+    </Text></Text>
         {" "} male/female, married/single
         of legal age, Filipino and a resident of Barangay {barangay},
         Dagupan City, is known me personally to be a good moral character and a law 
