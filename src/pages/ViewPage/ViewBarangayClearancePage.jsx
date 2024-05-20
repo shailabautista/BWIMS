@@ -100,7 +100,7 @@ const PDFDocument = ({ formData, barangay }) => (
           paddingRight: '2cm',
         }}>
         {" "}{" "}{" "}{" "}{" "}{" "}{" "}This is to certify that{" "}
-        <Text style={{ fontSize: 13, fontWeight: 'bold', }}>{formData.lastName}, {formData.firstName} {formData.extensionName ? formData.extensionName : null} {formData.middleName}
+        <Text style={{ fontSize: 13, fontWeight: 5, }}>{formData.lastName}, {formData.firstName} {formData.extensionName ? formData.extensionName : null} {formData.middleName}
         </Text>
         {" "} male/female, married/single
         of legal age, Filipino and a resident of Barangay {barangay},
