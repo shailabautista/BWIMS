@@ -100,7 +100,7 @@ const PDFDocument = ({ formData, barangay }) => (
           paddingRight: '2cm',
         }}>
         {" "}{" "}{" "}{" "}{" "}{" "}{" "}This is to certify that{" "}
-        <Text style={{ fontSize: 12, }}>{formData.lastName}, {formData.firstName} {formData.extensionName ?  formData.extensionName  : null} {formData.middleName}</Text>
+        <Text style={{ fontSize: 12, }}><strong>{formData.lastName}, {formData.firstName} {formData.extensionName ?  formData.extensionName  : null} {formData.middleName}</Text></strong>
         {" "} male/female, married/single
         of legal age, Filipino and a resident of Barangay {barangay},
         Dagupan City, is known me personally to be a good moral character and a law 
@@ -128,8 +128,8 @@ const PDFDocument = ({ formData, barangay }) => (
           paddingLeft: '2cm',
           paddingRight: '2cm',
         }}>
-        {barangay === "Salapingao" ? "DELFIN C. DE GUZMAN" : barangay === "Lomboy" ? "ARSENIO V. SANTILLAN SR." : 'Kapitan C. Tutan'}
-      </Text>
+        <strong>{barangay === "Salapingao" ? "DELFIN C. DE GUZMAN" : barangay === "Lomboy" ? "ARSENIO V. SANTILLAN SR." : 'Kapitan C. Tutan'}
+      </Text></strong>
       <Text style={{
           textAlign: "center",
           paddingLeft: '13cm',
